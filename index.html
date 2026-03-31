@@ -810,7 +810,7 @@
     .foot-nav { display: flex; gap: 26px; flex-wrap: wrap; }
     .foot-nav a { font-size: 0.64rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
     .foot-nav a:hover { color: var(--bone); }
-    .foot-copy { font-size: 0.65rem; color: rgba(242,242,238,0.5); letter-spacing: 0.08em; }
+    .foot-copy { font-size: 0.65rem; color: rgba(242,242,238,0.88); letter-spacing: 0.08em; }
 
     .foot-social { display: flex; gap: 14px; align-items: center; }
     .foot-social a {
@@ -989,7 +989,12 @@
 
         /* Contact */
         .contact-left h2 { font-size: 1.8rem !important; }
-        .form-row { flex-direction: column !important; gap: 0 !important; }
+        .form-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+        .booking-layout { grid-template-columns: 1fr !important; gap: 36px !important; }
+        .contact-tabs { margin-bottom: 36px !important; overflow-x: auto; white-space: nowrap; }
+        .ctab { padding: 12px 18px !important; }
+        .slot-grid { grid-template-columns: repeat(4,1fr) !important; }
+        .booking-selection { flex-wrap: wrap !important; gap: 14px !important; }
 
         /* Section headings */
         .sec-hd { margin-bottom: 32px !important; }
@@ -1005,7 +1010,7 @@
         /* Everything 1 col */
         .problem-stats  { grid-template-columns: 1fr 1fr !important; }
         .sectors-grid   { grid-template-columns: 1fr !important; }
-        .foot-top       { grid-template-columns: 1fr !important; gap: 24px !important; }
+        .foot-top       { grid-template-columns: 1fr !important; gap: 20px !important; }
         .foot-top > div:first-child { grid-column: 1 !important; }
 
         /* Hero tighter */
@@ -1023,6 +1028,20 @@
 
         /* Stats 2-col on small */
         .problem-stats > div { padding: 20px 16px !important; }
+
+        /* Contact mobile */
+        .slot-grid { grid-template-columns: repeat(2,1fr) !important; }
+        .ctab { padding: 10px 14px !important; font-size: 0.62rem !important; letter-spacing: 0.08em !important; }
+        .booking-selection { flex-direction: column !important; gap: 10px !important; }
+        .booking-sel-divider { display: none !important; }
+        .cal-days-header span { font-size: 0.52rem !important; }
+        .cal-day { font-size: 0.72rem !important; }
+
+        /* Form rows single col */
+        .form-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+        /* Section headings smaller */
+        h2 { font-size: clamp(1.65rem, 7.5vw, 2.2rem) !important; }
     }
 
     /* ── CLIENT PORTAL MODAL ── */
@@ -1166,6 +1185,23 @@
 
 
 <!-- ============================================================
+     ABOUT / FOUNDER
+============================================================ -->
+<section id="founder" class="sec" style="background:#0a0a0a;">
+    <div class="wrap">
+        <div class="r" style="max-width:820px;">
+            <span class="tag" style="display:block;margin-bottom:20px;">About ORDYX Group</span>
+            <h2 style="color:#fff;line-height:1.12;margin-bottom:36px;">Built by operators.<br>For operators.</h2>
+            <div style="display:flex;flex-direction:column;gap:22px;">
+                <p style="font-size:0.94rem;color:var(--muted);line-height:1.88;">ORDYX Group was founded by operational executives with over a decade of hands-on experience restructuring and scaling businesses across Europe and the Middle East. Not consultants. Operators. People who've sat in the chair, managed the team, and felt what it costs when the operating system fails.</p>
+                <p style="font-size:0.94rem;color:var(--muted);line-height:1.88;">Headquartered in Frankfurt am Main — the financial capital of Europe, home to the ECB and the institutions that define what precision looks like. We operate as partners, not advisors. We assess honestly, install completely, and stay accountable until the result is visible.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
      THE PROBLEM
 ============================================================ -->
 <section id="problem" class="sec" style="background:#fff;">
@@ -1197,26 +1233,29 @@
                 <div class="sector-desc">Restaurants, cafés, pubs &amp; boutique hotels. Operational frameworks built for high-turnover, service-driven environments.</div>
                 <div class="sector-arrow">→</div>
             </a>
-            <a href="#contact" class="sector-card r d1">
+            <a href="#contact" class="sector-card coming r d1">
+                <div class="sector-badge">Coming 2027</div>
                 <div class="sector-num">02</div>
                 <div class="sector-name">Healthcare</div>
                 <div class="sector-desc">Private clinics, dental practices &amp; wellness centres. Compliance, capacity and team accountability — installed.</div>
                 <div class="sector-arrow">→</div>
             </a>
-            <a href="#contact" class="sector-card r d2">
+            <a href="#contact" class="sector-card coming r d2">
+                <div class="sector-badge">Coming 2027</div>
                 <div class="sector-num">03</div>
                 <div class="sector-name">Professional Services</div>
                 <div class="sector-desc">Law firms, accounting practices, agencies &amp; studios. Billable time reclaimed through operational clarity.</div>
                 <div class="sector-arrow">→</div>
             </a>
-            <a href="#contact" class="sector-card r d3">
+            <a href="#contact" class="sector-card coming r d3">
+                <div class="sector-badge">Coming 2028</div>
                 <div class="sector-num">04</div>
                 <div class="sector-name">Technology</div>
                 <div class="sector-desc">Software companies, IT services &amp; startups. Execution infrastructure for teams that have outgrown their process.</div>
                 <div class="sector-arrow">→</div>
             </a>
             <a href="#contact" class="sector-card coming r d4">
-                <div class="sector-badge">Coming 2027</div>
+                <div class="sector-badge">Coming 2028</div>
                 <div class="sector-num">05</div>
                 <div class="sector-name">Logistics</div>
                 <div class="sector-desc">Distribution, warehousing &amp; fleet management. Operational law for businesses that cannot afford variance.</div>
@@ -1332,6 +1371,7 @@
             <div>
                 <span class="tag" style="display:block;margin-bottom:16px;">Results</span>
                 <h2>What changes when you<br>install discipline.</h2>
+                <p style="font-size:0.88rem;line-height:1.92;color:var(--muted);max-width:500px;margin-top:20px;">Every month without a system is compounding quietly — in revenue lost to inefficiency, in talent that walks out, in decisions that only you can make. The owners who waited longest always say the same thing: <em style="color:var(--bone);font-style:normal;font-weight:500;">"I wish I had done this sooner."</em></p>
             </div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
                 <div style="border-left:1px solid var(--border);padding:0 28px;">
@@ -1395,21 +1435,6 @@
 </section>
 
 
-<!-- ============================================================
-     FOUNDER
-============================================================ -->
-<section id="founder" class="sec" style="background:#fff;">
-    <div class="wrap">
-        <div class="r" style="max-width:800px;">
-            <span class="tag" style="color:#0F2A1D;display:block;margin-bottom:20px;">About ORDYX Group</span>
-            <h2 style="color:#111;line-height:1.15;margin-bottom:32px;">Built by operators.<br>For operators.</h2>
-            <div style="display:flex;flex-direction:column;gap:24px;">
-                <p class="r" style="font-size:0.94rem;color:#333;line-height:1.85;">ORDYX Group was founded by operational executives with over a decade of hands-on experience restructuring and scaling businesses across Europe and the Middle East. Not consultants. Operators. People who've sat in the chair, managed the team, and felt what it costs when the operating system fails.</p>
-                <p class="r d1" style="font-size:0.94rem;color:#333;line-height:1.85;">Headquartered in Frankfurt am Main — the financial capital of Europe, home to the ECB and the institutions that define what precision looks like. We operate as partners, not advisors. We assess honestly, install completely, and stay accountable until the result is visible.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 <!-- ============================================================
@@ -1631,7 +1656,7 @@
                     <li><a href="#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Healthcare</a></li>
                     <li><a href="#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Professional Services</a></li>
                     <li><a href="#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Technology</a></li>
-                    <li><a href="#practice-areas" style="font-size:0.72rem;color:var(--muted);opacity:0.4;">Logistics (2027)</a></li>
+                    <li><a href="#practice-areas" style="font-size:0.72rem;color:var(--muted);opacity:0.4;">Logistics (2028)</a></li>
                 </ul>
             </div>
             <div>
@@ -1767,7 +1792,7 @@
 
         for (let d = 1; d <= daysInMonth; d++) {
             const date    = new Date(calYear, calMonth, d);
-            const isPast  = date < today;
+            const isPast  = date.getTime() <= today.getTime();
             const isToday = date.getTime() === today.getTime();
             const isAvail = AVAIL_DAYS.includes(date.getDay()) && !isPast;
             const dateStr = calYear + '-' + String(calMonth + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
@@ -1840,19 +1865,60 @@
     }
 
     /* ── BLOCKED EMAIL DOMAINS ── */
-    const BLOCKED = ['gmail','yahoo','hotmail','outlook','icloud','aol','live','me','googlemail','protonmail','gmx','web','yandex','mail','inbox'];
+    var BLOCKED = ['gmail','yahoo','hotmail','outlook','icloud','aol','live','me','googlemail','protonmail','gmx','web','yandex','mail','inbox'];
     function isPersonalEmail(email) {
-        const dom = (email.split('@')[1] || '').toLowerCase();
-        return BLOCKED.some(function(b) { return dom === b + '.com' || dom === b + '.de' || dom.startsWith(b + '.'); });
+        var dom = (email.split('@')[1] || '').toLowerCase();
+        return BLOCKED.some(function(b) { return dom === b+'.com' || dom === b+'.de' || dom.startsWith(b+'.'); });
+    }
+
+    /* ── HIDDEN IFRAME JOTFORM SUBMIT (bypasses CORS) ── */
+    function jfSubmit(formId, fields) {
+        return new Promise(function(resolve) {
+            var fname  = 'jf_' + Date.now();
+            var iframe = document.createElement('iframe');
+            iframe.name = fname;
+            iframe.setAttribute('style','position:fixed;width:1px;height:1px;top:-999px;left:-999px;border:none;opacity:0;');
+            document.body.appendChild(iframe);
+
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://submit.jotform.com/submit/' + formId + '/';
+            form.target = fname;
+            form.setAttribute('style','display:none;');
+
+            Object.keys(fields).forEach(function(k) {
+                var el = document.createElement('input');
+                el.type  = 'hidden';
+                el.name  = k;
+                el.value = fields[k] || '';
+                form.appendChild(el);
+            });
+
+            document.body.appendChild(form);
+
+            var settled = false;
+            function finish() {
+                if (settled) return;
+                settled = true;
+                setTimeout(function() {
+                    try { document.body.removeChild(form);   } catch(e) {}
+                    try { document.body.removeChild(iframe); } catch(e) {}
+                }, 2500);
+                resolve();
+            }
+            iframe.addEventListener('load', finish);
+            setTimeout(finish, 5000);
+            form.submit();
+        });
     }
 
     /* ── SUBMIT INQUIRY FORM ── */
-    async function submitInquiry(e) {
+    function submitInquiry(e) {
         e.preventDefault();
-        const form = document.getElementById('inquiryForm');
-        const btn  = document.getElementById('inquiry-btn');
-        const data = new FormData(form);
-        const email = (data.get('email') || '').trim();
+        var form  = document.getElementById('inquiryForm');
+        var btn   = document.getElementById('inquiry-btn');
+        var data  = new FormData(form);
+        var email = (data.get('email') || '').trim();
 
         if (!data.get('first') || !data.get('last') || !data.get('company') || !email || !data.get('message')) {
             alert('Please fill in all required fields.');
@@ -1866,42 +1932,34 @@
         btn.textContent = 'Sending…';
         btn.disabled = true;
 
-        const body = new URLSearchParams();
-        body.append('formID', '260893671355062');
-        body.append('q2_q2_fullname0[first]', data.get('first') || '');
-        body.append('q2_q2_fullname0[last]',  data.get('last')  || '');
-        body.append('q3_q3_textbox1',         data.get('company') || '');
-        body.append('q4_q4_email2',           email);
-        body.append('q5_q5_phone3[full]',     data.get('phone') || '');
-        body.append('q6_q6_textarea4',        data.get('message') || '');
-        body.append('simple_spc',             '');
-
-        try {
-            await fetch('https://submit.jotform.com/submit/260893671355062/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: body.toString(),
-                mode: 'no-cors'
-            });
-        } catch(err) {}
-
-        form.style.display = 'none';
-        document.getElementById('inquiry-ok').classList.add('show');
+        jfSubmit('260893671355062', {
+            'formID':                 '260893671355062',
+            'q2_q2_fullname0[first]': data.get('first')   || '',
+            'q2_q2_fullname0[last]':  data.get('last')    || '',
+            'q3_q3_textbox1':         data.get('company') || '',
+            'q4_q4_email2':           email,
+            'q5_q5_phone3[full]':     data.get('phone')   || '',
+            'q6_q6_textarea4':        data.get('message') || '',
+            'simple_spc':             ''
+        }).then(function() {
+            form.style.display = 'none';
+            document.getElementById('inquiry-ok').classList.add('show');
+        });
     }
 
     /* ── SUBMIT BOOKING FORM ── */
-    async function submitBooking(e) {
+    function submitBooking(e) {
         e.preventDefault();
-        const form = document.getElementById('bookingForm');
-        const btn  = document.getElementById('booking-btn');
+        var form = document.getElementById('bookingForm');
+        var btn  = document.getElementById('booking-btn');
 
         if (!selDate || !selTime) {
             alert('Please select a date and time before submitting.');
             return;
         }
 
-        const fData = new FormData(form);
-        const email = (fData.get('bemail') || '').trim();
+        var fData = new FormData(form);
+        var email = (fData.get('bemail') || '').trim();
 
         if (!fData.get('bfirst') || !fData.get('blast') || !fData.get('bcompany') || !email) {
             alert('Please fill in all required fields.');
@@ -1915,36 +1973,27 @@
         btn.textContent = 'Submitting…';
         btn.disabled = true;
 
-        // Format: MM/DD/YYYY HH:MM
-        const parts  = selDate.split('-').map(Number);
-        const jfDate = String(parts[1]).padStart(2,'0') + '/' + String(parts[2]).padStart(2,'0') + '/' + parts[0] + ' ' + selTime;
+        var pts   = selDate.split('-').map(Number);
+        var jfDt  = String(pts[1]).padStart(2,'0') + '/' + String(pts[2]).padStart(2,'0') + '/' + pts[0] + ' ' + selTime;
 
-        const body = new URLSearchParams();
-        body.append('formID', '260893075278064');
-        body.append('q2_q2_fullname0[first]',      fData.get('bfirst')   || '');
-        body.append('q2_q2_fullname0[last]',       fData.get('blast')    || '');
-        body.append('q3_q3_textbox1',              fData.get('bcompany') || '');
-        body.append('q4_q4_email2',                email);
-        body.append('q5_q5_phone3[full]',          fData.get('bphone')   || '');
-        body.append('q6_q6_textbox4',              fData.get('bwebsite') || '');
-        body.append('q7_q7_textarea5',             fData.get('bdesc')    || '');
-        body.append('q8_q8_appointment6[date]',    jfDate);
-        body.append('q8_q8_appointment6[implementation]', 'new');
-        body.append('q8_q8_appointment6[duration]',       '30');
-        body.append('q8_q8_appointment6[timezone]',       'Europe/Berlin (GMT+02:00)');
-        body.append('simple_spc', '');
-
-        try {
-            await fetch('https://submit.jotform.com/submit/260893075278064/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: body.toString(),
-                mode: 'no-cors'
-            });
-        } catch(err) {}
-
-        document.getElementById('booking-ui').style.display = 'none';
-        document.getElementById('booking-ok').classList.add('show');
+        jfSubmit('260893075278064', {
+            'formID':                              '260893075278064',
+            'q2_q2_fullname0[first]':              fData.get('bfirst')   || '',
+            'q2_q2_fullname0[last]':               fData.get('blast')    || '',
+            'q3_q3_textbox1':                      fData.get('bcompany') || '',
+            'q4_q4_email2':                        email,
+            'q5_q5_phone3[full]':                  fData.get('bphone')   || '',
+            'q6_q6_textbox4':                      fData.get('bwebsite') || '',
+            'q7_q7_textarea5':                     fData.get('bdesc')    || '',
+            'q8_q8_appointment6[date]':            jfDt,
+            'q8_q8_appointment6[implementation]':  'new',
+            'q8_q8_appointment6[duration]':        '30',
+            'q8_q8_appointment6[timezone]':        'Europe/Berlin (GMT+02:00)',
+            'simple_spc':                          ''
+        }).then(function() {
+            document.getElementById('booking-ui').style.display = 'none';
+            document.getElementById('booking-ok').classList.add('show');
+        });
     }
 
     /* Client Portal modal */
