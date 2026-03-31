@@ -21,8 +21,8 @@
         --bone:   #F2F2EE;
         --gold:   #C9B037;
         --green:  #0F2A1D;
-        --muted:  rgba(242,242,238,0.86);
-        --dim:    rgba(242,242,238,0.55);
+        --muted:  rgba(242,242,238,0.90);
+        --dim:    rgba(242,242,238,0.62);
         --border: rgba(242,242,238,0.11);
         --gborder:rgba(201,176,55,0.32);
 
@@ -215,10 +215,10 @@
         position: absolute; inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.35) 0%,
-            rgba(0,0,0,0.20) 40%,
-            rgba(0,0,0,0.18) 65%,
-            rgba(0,0,0,0.42) 100%
+            rgba(0,0,0,0.58) 0%,
+            rgba(0,0,0,0.45) 38%,
+            rgba(0,0,0,0.42) 62%,
+            rgba(0,0,0,0.65) 100%
         );
     }
     .hero-body {
@@ -712,6 +712,8 @@
     @media (max-width: 860px) {
         .contact-grid { grid-template-columns: 1fr; gap: 44px; }
         .form-row { grid-template-columns: 1fr; }
+        #contact .booking-header { grid-template-columns: 1fr !important; gap: 32px !important; }
+        #JotFormIFrame-260893075278064 { height: 1020px !important; }
     }
 
     /* ============================================================
@@ -1353,58 +1355,53 @@
 </section>
 
 <!-- ============================================================
-     CONTACT
+     REQUEST A MEETING — JOTFORM BOOKING
 ============================================================ -->
-<section id="contact" class="sec">
+<section id="contact" class="sec" style="background:#060606;">
     <div class="wrap">
-        <div class="r" style="text-align:center;margin-bottom:72px;">
-            <h2 style="margin-bottom:20px;line-height:1.15;">If something is broken,<br>it is not going to fix itself.</h2>
-            <p style="font-size:0.96rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.8;">30 minutes. Structured assessment. By application only. We identify what is broken and what it is costing you — or we tell you we can't help.</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-left r">
-                <span class="tag" style="margin-bottom:18px;display:block;">Entry Point</span>
-                <h2>Request Entry.</h2>
-                <p>Entry into ORDYX Group begins with a 30-minute assessment. This is not a sales call. It is a structured evaluation of your operating system. We determine fit — not the other way around.</p>
-                <div class="cd-table">
-                    <div class="cd-row"><span class="cd-k">Engagement Types</span><span class="cd-v">Diagnostic · System Installation · Enforcement Layer</span></div>
-                    <div class="cd-row"><span class="cd-k">Headquarters</span><span class="cd-v">Frankfurt am Main, Germany</span></div>
-                    <div class="cd-row"><span class="cd-k">Target Organisation</span><span class="cd-v">SMEs &amp; Scale-Ups — 10 to 250 Employees</span></div>
-                    <div class="cd-row"><span class="cd-k">Response</span><span class="cd-v">Within 48 business hours</span></div>
-                </div>
-            </div>
 
-            <div class="r d1">
-                <form class="form" id="contactForm" novalidate>
-                    <div class="form-row">
-                        <div class="fg"><label for="fn">Full Name</label><input type="text" id="fn" name="name" placeholder="Your full name" required></div>
-                        <div class="fg"><label for="fr">Role / Title</label><input type="text" id="fr" name="role" placeholder="Founder / MD / Director" required></div>
+        <!-- Section header -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:64px;align-items:end;" class="r">
+            <div>
+                <span class="tag" style="display:block;margin-bottom:18px;">Schedule</span>
+                <h2 style="line-height:1.1;">If something is broken,<br>it is not going to fix itself.</h2>
+            </div>
+            <div style="padding-bottom:4px;">
+                <p style="font-size:0.92rem;line-height:1.88;margin-bottom:16px;">Select a time that works. We assess every request before confirming. This is not a sales call — it is a structured evaluation.</p>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:24px;">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="color:var(--gold);font-size:0.8rem;">—</span>
+                        <span style="font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--bone);">30 minutes. Structured assessment.</span>
                     </div>
-                    <div class="fg"><label for="fc">Organisation</label><input type="text" id="fc" name="company" placeholder="Company name" required></div>
-                    <div class="form-row">
-                        <div class="fg">
-                            <label for="fe">Employee Count</label>
-                            <select id="fe" name="employees" required>
-                                <option value="">Select range</option>
-                                <option>10 – 30</option><option>30 – 70</option>
-                                <option>70 – 150</option><option>150 – 250</option><option>250+</option>
-                            </select>
-                        </div>
-                        <div class="fg"><label for="fem">Contact Email</label><input type="email" id="fem" name="email" placeholder="your@company.com" required></div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="color:var(--gold);font-size:0.8rem;">—</span>
+                        <span style="font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--bone);">Tuesday – Thursday, 14:00 – 16:00 CET.</span>
                     </div>
-                    <div class="fg">
-                        <label for="fch">Primary Operational Challenge</label>
-                        <textarea id="fch" name="challenge" placeholder="Describe the core breakdown in your operating system..." required></textarea>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="color:var(--gold);font-size:0.8rem;">—</span>
+                        <span style="font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--bone);">By application only.</span>
                     </div>
-                    <p class="form-note">ORDYX Group does not offer free consultations. This form initiates a qualification process. Only organisations that meet the entry conditions will receive a diagnostic proposal.</p>
-                    <button type="submit" class="btn btn-g form-submit">Submit Request</button>
-                </form>
-                <div class="form-ok" id="formOk">
-                    <h3>Request Received.</h3>
-                    <p>Your diagnostic request has been logged. ORDYX Group will assess your submission and respond within 48 business hours if your organisation meets the entry conditions.</p>
                 </div>
             </div>
         </div>
+
+        <!-- JotForm Booking Embed -->
+        <div class="r" style="border:1px solid var(--border);overflow:hidden;background:#fff;">
+            <iframe
+                id="JotFormIFrame-260893075278064"
+                title="Request a 30-Minute Meeting — ORDYX Group"
+                allowtransparency="true"
+                allow="geolocation; microphone; camera; fullscreen"
+                src="https://form.jotform.com/260893075278064"
+                frameborder="0"
+                style="width:1px;min-width:100%;height:860px;border:none;display:block;"
+                scrolling="no"
+            ></iframe>
+        </div>
+
+        <!-- Bottom note -->
+        <p style="font-size:0.68rem;color:var(--dim);margin-top:20px;text-align:center;letter-spacing:0.06em;">Please use your company email address. Submissions with personal email domains will not be accepted.</p>
+
     </div>
 </section>
 
@@ -1519,32 +1516,11 @@
     );
     document.querySelectorAll('.r').forEach(el => io.observe(el));
 
-    /* Form — submit via formsubmit.co to management@ordyxgroup.com */
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        if (!this.checkValidity()) { this.reportValidity(); return; }
-        const btn = this.querySelector('button[type="submit"]');
-        const orig = btn.textContent;
-        btn.textContent = 'Sending…';
-        btn.disabled = true;
-        const data = new FormData(this);
-        data.append('_subject', 'New Request — ORDYX Group Website');
-        data.append('_captcha', 'false');
-        data.append('_template', 'table');
-        try {
-            const res = await fetch('https://formsubmit.co/ajax/management@ordyxgroup.com', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: data
-            });
-            if (res.ok) {
-                this.style.display = 'none';
-                document.getElementById('formOk').classList.add('show');
-            } else { throw new Error('fail'); }
-        } catch(_) {
-            btn.textContent = orig;
-            btn.disabled = false;
-            alert('There was an issue sending your request. Please try again.');
+    /* JotForm iframe auto-resize */
+    window.addEventListener('message', function(e) {
+        if (typeof e.data === 'object' && e.data.action === 'setHeight' && e.data.frameId === 'JotFormIFrame-260893075278064') {
+            var iframe = document.getElementById('JotFormIFrame-260893075278064');
+            if (iframe) iframe.style.height = e.data.value + 'px';
         }
     });
 
