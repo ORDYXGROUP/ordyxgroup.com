@@ -204,7 +204,8 @@
     .hero-img {
         position: absolute; inset: 0; z-index: 0;
     }
-    .hero-img img {
+    .hero-img img,
+    .hero-img video {
         width: 100%; height: 100%;
         object-fit: cover; object-position: center 35%;
         display: block;
@@ -1056,12 +1057,16 @@
 ============================================================ -->
 <section id="hero">
     <div class="hero-img">
-        <img
-            src="images/frankfurt1.jpg"
-            alt="Frankfurt am Main — ORDYX Group Global HQ"
-            loading="eager"
-            onerror="this.style.display='none'"
+        <video
+            autoplay muted loop playsinline
+            preload="auto"
+            poster="images/frankfurt1.jpg"
+            disablepictureinpicture
+            disableremoteplayback
         >
+            <source src="images/hero-video.mp4" type="video/mp4">
+            <img src="images/frankfurt1.jpg" alt="Frankfurt am Main — ORDYX Group Global HQ">
+        </video>
     </div>
 
     <div class="hero-body wrap">
@@ -1181,7 +1186,7 @@
                 <div class="r" style="background:#fff;padding:40px 36px;border-top:2px solid #C9B037;">
                     <div style="font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#C9B037;margin-bottom:22px;">Step 01</div>
                     <h3 style="color:#111;margin-bottom:14px;">Diagnose.</h3>
-                    <p style="font-size:0.84rem;color:#666;line-height:1.78;margin:0;">We map every operational gap in your business. 30 minutes. No pitch. Just clarity on what's broken and what it's costing you.</p>
+                    <p style="font-size:0.84rem;color:#666;line-height:1.78;margin:0;">We map every operational gap in your business. 30 minutes. Structured assessment. By application only.</p>
                 </div>
                 <div class="r d1" style="background:#fff;padding:40px 36px;border-top:2px solid #C9B037;">
                     <div style="font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#C9B037;margin-bottom:22px;">Step 02</div>
