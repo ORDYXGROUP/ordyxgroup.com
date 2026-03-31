@@ -139,7 +139,7 @@
     .nav-links a {
         font-size: 0.78rem; font-weight: 600;
         letter-spacing: 0.12em; text-transform: uppercase;
-        color: rgba(242,242,238,0.75);
+        color: rgba(242,242,238,0.92);
         position: relative; transition: color 0.22s;
     }
     .nav-links a::after {
@@ -158,12 +158,12 @@
 
     .nav-portal {
         font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-        color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.25);
+        color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.50);
         padding: 9px 16px; display: flex; align-items: center; gap: 7px;
-        transition: border-color 0.22s, color 0.22s; cursor: pointer;
+        transition: border-color 0.22s, color 0.22s, background 0.22s; cursor: pointer;
     }
-    .nav-portal svg { width: 13px; height: 13px; opacity: 0.7; }
-    .nav-portal:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+    .nav-portal svg { width: 13px; height: 13px; opacity: 0.9; }
+    .nav-portal:hover { border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); color: #fff; }
     .nav-portal:hover svg { opacity: 1; }
 
     .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
@@ -215,10 +215,10 @@
         position: absolute; inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.58) 0%,
-            rgba(0,0,0,0.45) 38%,
-            rgba(0,0,0,0.42) 62%,
-            rgba(0,0,0,0.65) 100%
+            rgba(0,0,0,0.76) 0%,
+            rgba(0,0,0,0.62) 38%,
+            rgba(0,0,0,0.59) 62%,
+            rgba(0,0,0,0.82) 100%
         );
     }
     .hero-body {
@@ -677,8 +677,8 @@
     /* ============================================================
        CONTACT
     ============================================================ */
-    #contact { background: var(--black); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    #contact { background: #060606; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
     .contact-left h2 { margin-bottom: 18px; }
     .contact-left p { font-size: 0.93rem; margin-bottom: 40px; }
 
@@ -698,22 +698,105 @@
         outline: none; transition: border-color 0.22s; width: 100%; -webkit-appearance: none;
     }
     .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--gold); }
-    .fg input::placeholder, .fg textarea::placeholder { color: rgba(242,242,238,0.16); }
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(242,242,238,0.18); }
     .fg select option { background: #0a0a0a; }
     .fg textarea { min-height: 105px; resize: vertical; }
-    .form-note { font-size: 0.7rem; color: var(--muted); line-height: 1.62; }
+    .form-note { font-size: 0.7rem; color: var(--dim); line-height: 1.62; }
     .form-submit { width: 100%; justify-content: center; }
 
-    .form-ok { display: none; padding: 44px; border: 1px solid var(--gborder); text-align: center; }
+    .form-ok { display: none; padding: 52px 44px; border: 1px solid var(--gborder); text-align: center; background: rgba(201,176,55,0.03); }
     .form-ok.show { display: block; }
-    .form-ok h3 { margin-bottom: 10px; }
-    .form-ok p { font-size: 0.87rem; }
+    .form-ok h3 { margin-bottom: 12px; color: #fff; }
+    .form-ok p { font-size: 0.87rem; color: var(--muted); }
+
+    /* Contact tabs */
+    .contact-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 64px; }
+    .ctab {
+        font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--dim); padding: 14px 32px; border: none; background: transparent;
+        cursor: pointer; transition: color 0.22s; border-bottom: 2px solid transparent;
+        margin-bottom: -1px; font-family: var(--f);
+    }
+    .ctab.active { color: var(--bone); border-bottom-color: var(--gold); }
+    .ctab:hover:not(.active) { color: rgba(242,242,238,0.75); }
+    .ctab-panel { display: none; }
+    .ctab-panel.active { display: block; }
+
+    /* Booking layout */
+    .booking-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: 72px; align-items: start; }
+    .booking-cal-col {}
+    .booking-form-col {}
+
+    /* Calendar widget */
+    .cal-widget { border: 1px solid var(--border); background: #0a0a0a; }
+    .cal-nav {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 14px 20px; border-bottom: 1px solid var(--border);
+    }
+    .cal-arrow {
+        background: none; border: none; color: var(--muted);
+        font-size: 1rem; cursor: pointer; padding: 5px 10px;
+        transition: color 0.2s; font-family: var(--f); line-height: 1;
+    }
+    .cal-arrow:hover { color: var(--gold); }
+    .cal-month-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone); }
+    .cal-days-header {
+        display: grid; grid-template-columns: repeat(7, 1fr);
+        padding: 12px 12px 6px; border-bottom: 1px solid rgba(242,242,238,0.05);
+    }
+    .cal-days-header span {
+        font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--dim); text-align: center;
+    }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; padding: 8px 12px 16px; }
+    .cal-day {
+        aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+        font-size: 0.78rem; color: rgba(242,242,238,0.22);
+        border: 1px solid transparent; cursor: default; transition: all 0.18s; user-select: none;
+    }
+    .cal-day.available {
+        color: var(--bone); cursor: pointer; border-color: var(--border);
+    }
+    .cal-day.available:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,176,55,0.08); }
+    .cal-day.selected { background: var(--gold) !important; color: #000 !important; border-color: var(--gold) !important; font-weight: 700; }
+    .cal-day.past { opacity: 0.2; }
+    .cal-day.today-marker { border-color: rgba(242,242,238,0.18); color: var(--bone); }
+
+    /* Time slots */
+    .time-slots { margin-top: 20px; padding: 20px; border: 1px solid var(--border); background: #0a0a0a; }
+    .time-slots-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .slot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .slot {
+        padding: 12px 6px; text-align: center;
+        font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+        border: 1px solid var(--border); color: var(--muted);
+        cursor: pointer; transition: all 0.18s; background: transparent;
+        font-family: var(--f);
+    }
+    .slot:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,176,55,0.07); }
+    .slot.selected { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+
+    /* Booking selection display */
+    .booking-selection {
+        border: 1px solid var(--gborder); padding: 16px 22px;
+        margin-bottom: 22px; background: rgba(201,176,55,0.04);
+        display: flex; gap: 28px; align-items: center; flex-wrap: wrap;
+    }
+    .booking-sel-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .booking-sel-value { font-size: 0.85rem; font-weight: 500; color: var(--bone); }
+    .booking-sel-divider { width: 1px; height: 32px; background: var(--border); }
 
     @media (max-width: 860px) {
         .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+        .booking-layout { grid-template-columns: 1fr; gap: 44px; }
         .form-row { grid-template-columns: 1fr; }
-        #contact .booking-header { grid-template-columns: 1fr !important; gap: 32px !important; }
-        #JotFormIFrame-260893075278064 { height: 1020px !important; }
+        .contact-tabs { margin-bottom: 40px; }
+        .ctab { padding: 12px 20px; font-size: 0.65rem; }
+        .slot-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 480px) {
+        .slot-grid { grid-template-columns: repeat(2, 1fr); }
+        .booking-sel-divider { display: none; }
     }
 
     /* ============================================================
@@ -1029,7 +1112,7 @@
 
     <ul class="nav-links">
         <li><a href="#practice-areas">Industries</a></li>
-        <li><a href="#what-we-do">What We Do</a></li>
+        <li><a href="#what-we-do">How It Works</a></li>
         <li><a href="#audience">Who It's For</a></li>
         <li><a href="#proof">Results</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1047,10 +1130,11 @@
 
 <nav class="mob-nav" id="mobNav">
     <a href="#practice-areas" onclick="closeNav()">Industries</a>
-    <a href="#what-we-do"     onclick="closeNav()">What We Do</a>
+    <a href="#what-we-do"     onclick="closeNav()">How It Works</a>
     <a href="#audience"       onclick="closeNav()">Who It's For</a>
     <a href="#proof"          onclick="closeNav()">Results</a>
     <a href="#contact"        onclick="closeNav()">Contact</a>
+    <a href="#" onclick="closeNav();openPortal(event)">Client Portal</a>
 </nav>
 
 
@@ -1355,52 +1439,164 @@
 </section>
 
 <!-- ============================================================
-     REQUEST A MEETING — JOTFORM BOOKING
+     CONTACT & BOOKING
 ============================================================ -->
-<section id="contact" class="sec" style="background:#060606;">
+<section id="contact" class="sec">
     <div class="wrap">
 
         <!-- Section header -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:64px;align-items:end;" class="r">
-            <div>
-                <span class="tag" style="display:block;margin-bottom:18px;">Schedule</span>
-                <h2 style="line-height:1.1;">If something is broken,<br>it is not going to fix itself.</h2>
-            </div>
-            <div style="padding-bottom:4px;">
-                <p style="font-size:0.92rem;line-height:1.88;margin-bottom:16px;">Select a time that works. We assess every request before confirming. This is not a sales call — it is a structured evaluation.</p>
-                <div style="display:flex;flex-direction:column;gap:8px;margin-top:24px;">
-                    <div style="display:flex;align-items:center;gap:12px;">
-                        <span style="color:var(--gold);font-size:0.8rem;">—</span>
-                        <span style="font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--bone);">30 minutes. Structured assessment.</span>
+        <div class="r" style="margin-bottom:52px;">
+            <span class="tag" style="display:block;margin-bottom:16px;">Get In Touch</span>
+            <h2 style="max-width:620px;line-height:1.08;">The right conversation<br>starts with the right request.</h2>
+        </div>
+
+        <!-- Tabs -->
+        <div class="contact-tabs r d1">
+            <button class="ctab active" id="ctab-inquiry" onclick="switchContactTab('inquiry')">Send a Message</button>
+            <button class="ctab" id="ctab-book" onclick="switchContactTab('book')">Schedule a Meeting</button>
+        </div>
+
+        <!-- ── TAB 1: Inquiry Form ── -->
+        <div id="ctab-inquiry-panel" class="ctab-panel active">
+            <div class="contact-grid">
+                <div class="r">
+                    <h3 style="margin-bottom:18px;line-height:1.3;font-size:clamp(1.1rem,1.7vw,1.55rem);">Not ready for a call?<br>Send us a message.</h3>
+                    <p style="font-size:0.88rem;line-height:1.9;margin-bottom:36px;">We review every inquiry. If there's a fit, we'll reach out within 24 hours to arrange a structured evaluation.</p>
+                    <div class="cd-table">
+                        <div class="cd-row">
+                            <div class="cd-k">Response Time</div>
+                            <div class="cd-v">Within 24 hours</div>
+                        </div>
+                        <div class="cd-row">
+                            <div class="cd-k">Location</div>
+                            <div class="cd-v">Frankfurt am Main, Germany</div>
+                        </div>
+                        <div class="cd-row">
+                            <div class="cd-k">Engagements</div>
+                            <div class="cd-v">By application only</div>
+                        </div>
                     </div>
-                    <div style="display:flex;align-items:center;gap:12px;">
-                        <span style="color:var(--gold);font-size:0.8rem;">—</span>
-                        <span style="font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--bone);">Tuesday – Thursday, 14:00 – 16:00 CET.</span>
+                </div>
+                <div class="r d1">
+                    <div class="form-ok" id="inquiry-ok">
+                        <h3>Message received.</h3>
+                        <p>We'll review your inquiry and respond within 24 hours if there's a fit.</p>
                     </div>
-                    <div style="display:flex;align-items:center;gap:12px;">
-                        <span style="color:var(--gold);font-size:0.8rem;">—</span>
-                        <span style="font-size:0.78rem;font-weight:500;letter-spacing:0.06em;color:var(--bone);">By application only.</span>
-                    </div>
+                    <form class="form" id="inquiryForm" onsubmit="submitInquiry(event)" novalidate>
+                        <div class="form-row">
+                            <div class="fg">
+                                <label>First Name</label>
+                                <input type="text" name="first" placeholder="First name" required>
+                            </div>
+                            <div class="fg">
+                                <label>Last Name</label>
+                                <input type="text" name="last" placeholder="Last name" required>
+                            </div>
+                        </div>
+                        <div class="fg">
+                            <label>Company Name</label>
+                            <input type="text" name="company" placeholder="Your organisation" required>
+                        </div>
+                        <div class="fg">
+                            <label>Work Email</label>
+                            <input type="email" name="email" placeholder="your@company.com" required>
+                        </div>
+                        <div class="fg">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" placeholder="+49 ...">
+                        </div>
+                        <div class="fg">
+                            <label>Message</label>
+                            <textarea name="message" placeholder="Briefly describe what you're working on..." required></textarea>
+                        </div>
+                        <p class="form-note">Business email addresses only. Personal email domains are not accepted.</p>
+                        <button type="submit" class="btn btn-g form-submit" id="inquiry-btn">Send Message &nbsp;→</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <!-- JotForm Booking Embed -->
-        <div class="r" style="border:1px solid var(--border);overflow:hidden;background:#fff;">
-            <iframe
-                id="JotFormIFrame-260893075278064"
-                title="Request a 30-Minute Meeting — ORDYX Group"
-                allowtransparency="true"
-                allow="geolocation; microphone; camera; fullscreen"
-                src="https://form.jotform.com/260893075278064"
-                frameborder="0"
-                style="width:1px;min-width:100%;height:860px;border:none;display:block;"
-                scrolling="no"
-            ></iframe>
+        <!-- ── TAB 2: Schedule a Meeting ── -->
+        <div id="ctab-book-panel" class="ctab-panel">
+            <div class="form-ok" id="booking-ok">
+                <h3>Session requested.</h3>
+                <p>We'll confirm your meeting within 24 hours. Expect an email from our team.</p>
+            </div>
+            <div id="booking-ui">
+                <div class="booking-layout">
+                    <!-- Left: Calendar -->
+                    <div class="booking-cal-col r">
+                        <div style="margin-bottom:24px;">
+                            <h3 style="margin-bottom:10px;line-height:1.3;font-size:clamp(1.1rem,1.7vw,1.55rem);">Select a date.</h3>
+                            <p style="font-size:0.86rem;line-height:1.82;">Available slots are shown in the calendar. Select a date, then choose your preferred time.</p>
+                        </div>
+                        <div class="cal-widget">
+                            <div class="cal-nav">
+                                <button type="button" class="cal-arrow" id="calPrev" onclick="calNav(-1)">&#8592;</button>
+                                <span class="cal-month-label" id="calLabel"></span>
+                                <button type="button" class="cal-arrow" id="calNext" onclick="calNav(1)">&#8594;</button>
+                            </div>
+                            <div class="cal-days-header">
+                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                            </div>
+                            <div class="cal-grid" id="calGrid"></div>
+                        </div>
+                        <div class="time-slots" id="timeSlots" style="display:none;">
+                            <div class="time-slots-label" id="timeSlotsLabel">Select a time</div>
+                            <div class="slot-grid" id="slotGrid"></div>
+                        </div>
+                    </div>
+                    <!-- Right: Form -->
+                    <div class="booking-form-col r d1">
+                        <div class="booking-selection" id="bookingSelection" style="display:none;">
+                            <div>
+                                <div class="booking-sel-label">Date</div>
+                                <div class="booking-sel-value" id="bookingSelDate"></div>
+                            </div>
+                            <div class="booking-sel-divider"></div>
+                            <div>
+                                <div class="booking-sel-label">Time (CET)</div>
+                                <div class="booking-sel-value" id="bookingSelTime"></div>
+                            </div>
+                        </div>
+                        <form class="form" id="bookingForm" onsubmit="submitBooking(event)" novalidate>
+                            <div class="form-row">
+                                <div class="fg">
+                                    <label>First Name</label>
+                                    <input type="text" name="bfirst" placeholder="First name" required>
+                                </div>
+                                <div class="fg">
+                                    <label>Last Name</label>
+                                    <input type="text" name="blast" placeholder="Last name" required>
+                                </div>
+                            </div>
+                            <div class="fg">
+                                <label>Company Name</label>
+                                <input type="text" name="bcompany" placeholder="Your organisation" required>
+                            </div>
+                            <div class="fg">
+                                <label>Work Email</label>
+                                <input type="email" name="bemail" placeholder="your@company.com" required>
+                            </div>
+                            <div class="fg">
+                                <label>Phone Number</label>
+                                <input type="tel" name="bphone" placeholder="+49 ...">
+                            </div>
+                            <div class="fg">
+                                <label>Company Website</label>
+                                <input type="url" name="bwebsite" placeholder="https://yourcompany.com">
+                            </div>
+                            <div class="fg">
+                                <label>Primary Operational Challenge</label>
+                                <textarea name="bdesc" placeholder="Briefly describe the main issue you're facing..."></textarea>
+                            </div>
+                            <p class="form-note">Sessions are confirmed within 24 hours. Business email addresses only.</p>
+                            <button type="submit" class="btn btn-g form-submit" id="booking-btn">Request Session &nbsp;→</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Bottom note -->
-        <p style="font-size:0.68rem;color:var(--dim);margin-top:20px;text-align:center;letter-spacing:0.06em;">Please use your company email address. Submissions with personal email domains will not be accepted.</p>
 
     </div>
 </section>
@@ -1516,13 +1712,240 @@
     );
     document.querySelectorAll('.r').forEach(el => io.observe(el));
 
-    /* JotForm iframe auto-resize */
-    window.addEventListener('message', function(e) {
-        if (typeof e.data === 'object' && e.data.action === 'setHeight' && e.data.frameId === 'JotFormIFrame-260893075278064') {
-            var iframe = document.getElementById('JotFormIFrame-260893075278064');
-            if (iframe) iframe.style.height = e.data.value + 'px';
+    /* ── CONTACT TABS ── */
+    function switchContactTab(tab) {
+        document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.ctab-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('ctab-' + tab).classList.add('active');
+        document.getElementById('ctab-' + tab + '-panel').classList.add('active');
+        if (tab === 'book') calRender();
+    }
+
+    /* ── CALENDAR ── */
+    const MONTHS_CAL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const AVAIL_DAYS = [2, 3, 4]; // Tue=2, Wed=3, Thu=4  (JS: Sun=0, Mon=1, ...)
+    const TIME_SLOTS = ['14:00','14:30','15:00','15:30'];
+    let calYear, calMonth, selDate = null, selTime = null;
+
+    (function calInit() {
+        const now = new Date();
+        calYear  = now.getFullYear();
+        calMonth = now.getMonth();
+        calRender();
+    })();
+
+    function calNav(dir) {
+        calMonth += dir;
+        if (calMonth > 11) { calMonth = 0; calYear++; }
+        if (calMonth < 0)  { calMonth = 11; calYear--; }
+        calRender();
+    }
+
+    function calRender() {
+        const label = document.getElementById('calLabel');
+        if (!label) return;
+        label.textContent = MONTHS_CAL[calMonth] + ' ' + calYear;
+
+        const grid = document.getElementById('calGrid');
+        grid.innerHTML = '';
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const firstDay    = new Date(calYear, calMonth, 1);
+        const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+        // Monday-first offset
+        let offset = firstDay.getDay() - 1;
+        if (offset < 0) offset = 6;
+
+        for (let i = 0; i < offset; i++) {
+            const empty = document.createElement('div');
+            empty.className = 'cal-day';
+            grid.appendChild(empty);
         }
-    });
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const date    = new Date(calYear, calMonth, d);
+            const isPast  = date < today;
+            const isToday = date.getTime() === today.getTime();
+            const isAvail = AVAIL_DAYS.includes(date.getDay()) && !isPast;
+            const dateStr = calYear + '-' + String(calMonth + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+
+            const cell = document.createElement('div');
+            cell.textContent = d;
+
+            if (isAvail) {
+                cell.className = 'cal-day available' + (isToday ? ' today-marker' : '') + (selDate === dateStr ? ' selected' : '');
+                cell.onclick = (function(ds, dt) { return function() { selectCalDate(ds, dt); }; })(dateStr, date);
+            } else {
+                cell.className = 'cal-day' + (isPast ? ' past' : '') + (isToday ? ' today-marker' : '');
+            }
+            grid.appendChild(cell);
+        }
+
+        // Disable prev if at current month
+        const prevBtn = document.getElementById('calPrev');
+        const now     = new Date();
+        const atMin   = (calYear === now.getFullYear() && calMonth === now.getMonth());
+        prevBtn.style.opacity        = atMin ? '0.25' : '';
+        prevBtn.style.pointerEvents  = atMin ? 'none'  : '';
+    }
+
+    function selectCalDate(dateStr, dateObj) {
+        selDate = dateStr;
+        selTime = null;
+        calRender();
+
+        const slotsEl = document.getElementById('timeSlots');
+        const slotGrid = document.getElementById('slotGrid');
+        const lbl = document.getElementById('timeSlotsLabel');
+
+        const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        lbl.textContent = dateObj.toLocaleDateString('en-GB', opts);
+
+        slotGrid.innerHTML = '';
+        TIME_SLOTS.forEach(function(t) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'slot';
+            btn.textContent = t;
+            btn.onclick = (function(time) { return function() { selectTime(time); }; })(t);
+            slotGrid.appendChild(btn);
+        });
+        slotsEl.style.display = 'block';
+        updateBookingSel();
+    }
+
+    function selectTime(time) {
+        selTime = time;
+        document.querySelectorAll('.slot').forEach(function(s) {
+            s.classList.toggle('selected', s.textContent === time);
+        });
+        updateBookingSel();
+    }
+
+    function updateBookingSel() {
+        const selEl   = document.getElementById('bookingSelection');
+        const dateEl  = document.getElementById('bookingSelDate');
+        const timeEl  = document.getElementById('bookingSelTime');
+        if (selDate) {
+            const parts  = selDate.split('-').map(Number);
+            const dObj   = new Date(parts[0], parts[1] - 1, parts[2]);
+            const opts   = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+            dateEl.textContent = dObj.toLocaleDateString('en-GB', opts);
+        }
+        timeEl.textContent = selTime ? selTime + ' CET' : '—';
+        selEl.style.display = selDate ? 'flex' : 'none';
+    }
+
+    /* ── BLOCKED EMAIL DOMAINS ── */
+    const BLOCKED = ['gmail','yahoo','hotmail','outlook','icloud','aol','live','me','googlemail','protonmail','gmx','web','yandex','mail','inbox'];
+    function isPersonalEmail(email) {
+        const dom = (email.split('@')[1] || '').toLowerCase();
+        return BLOCKED.some(function(b) { return dom === b + '.com' || dom === b + '.de' || dom.startsWith(b + '.'); });
+    }
+
+    /* ── SUBMIT INQUIRY FORM ── */
+    async function submitInquiry(e) {
+        e.preventDefault();
+        const form = document.getElementById('inquiryForm');
+        const btn  = document.getElementById('inquiry-btn');
+        const data = new FormData(form);
+        const email = (data.get('email') || '').trim();
+
+        if (!data.get('first') || !data.get('last') || !data.get('company') || !email || !data.get('message')) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        if (isPersonalEmail(email)) {
+            alert('Please use your company email address. Personal email domains are not accepted.');
+            return;
+        }
+
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        const body = new URLSearchParams();
+        body.append('formID', '260893671355062');
+        body.append('q2_q2_fullname0[first]', data.get('first') || '');
+        body.append('q2_q2_fullname0[last]',  data.get('last')  || '');
+        body.append('q3_q3_textbox1',         data.get('company') || '');
+        body.append('q4_q4_email2',           email);
+        body.append('q5_q5_phone3[full]',     data.get('phone') || '');
+        body.append('q6_q6_textarea4',        data.get('message') || '');
+        body.append('simple_spc',             '');
+
+        try {
+            await fetch('https://submit.jotform.com/submit/260893671355062/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: body.toString(),
+                mode: 'no-cors'
+            });
+        } catch(err) {}
+
+        form.style.display = 'none';
+        document.getElementById('inquiry-ok').classList.add('show');
+    }
+
+    /* ── SUBMIT BOOKING FORM ── */
+    async function submitBooking(e) {
+        e.preventDefault();
+        const form = document.getElementById('bookingForm');
+        const btn  = document.getElementById('booking-btn');
+
+        if (!selDate || !selTime) {
+            alert('Please select a date and time before submitting.');
+            return;
+        }
+
+        const fData = new FormData(form);
+        const email = (fData.get('bemail') || '').trim();
+
+        if (!fData.get('bfirst') || !fData.get('blast') || !fData.get('bcompany') || !email) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        if (isPersonalEmail(email)) {
+            alert('Please use your company email address. Personal email domains are not accepted.');
+            return;
+        }
+
+        btn.textContent = 'Submitting…';
+        btn.disabled = true;
+
+        // Format: MM/DD/YYYY HH:MM
+        const parts  = selDate.split('-').map(Number);
+        const jfDate = String(parts[1]).padStart(2,'0') + '/' + String(parts[2]).padStart(2,'0') + '/' + parts[0] + ' ' + selTime;
+
+        const body = new URLSearchParams();
+        body.append('formID', '260893075278064');
+        body.append('q2_q2_fullname0[first]',      fData.get('bfirst')   || '');
+        body.append('q2_q2_fullname0[last]',       fData.get('blast')    || '');
+        body.append('q3_q3_textbox1',              fData.get('bcompany') || '');
+        body.append('q4_q4_email2',                email);
+        body.append('q5_q5_phone3[full]',          fData.get('bphone')   || '');
+        body.append('q6_q6_textbox4',              fData.get('bwebsite') || '');
+        body.append('q7_q7_textarea5',             fData.get('bdesc')    || '');
+        body.append('q8_q8_appointment6[date]',    jfDate);
+        body.append('q8_q8_appointment6[implementation]', 'new');
+        body.append('q8_q8_appointment6[duration]',       '30');
+        body.append('q8_q8_appointment6[timezone]',       'Europe/Berlin (GMT+02:00)');
+        body.append('simple_spc', '');
+
+        try {
+            await fetch('https://submit.jotform.com/submit/260893075278064/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: body.toString(),
+                mode: 'no-cors'
+            });
+        } catch(err) {}
+
+        document.getElementById('booking-ui').style.display = 'none';
+        document.getElementById('booking-ok').classList.add('show');
+    }
 
     /* Client Portal modal */
     const portalOverlay = document.getElementById('portalOverlay');
