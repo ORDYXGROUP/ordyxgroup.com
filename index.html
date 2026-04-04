@@ -243,6 +243,11 @@
         font-weight: 500;
     }
     .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    /* Statement bar — between sections */
+    .statement-bar { background: #0d0d0d; border-top: 1px solid rgba(201,176,55,0.15); border-bottom: 1px solid rgba(201,176,55,0.15); padding: 22px 0; text-align: center; }
+    .statement-bar span { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(201,176,55,0.5); }
+    /* Section micro — quiet line under section headings */
+    .sec-micro { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.55; margin-top: 14px; margin-bottom: 0; }
     .hero-location {
         position: absolute; bottom: 36px; right: var(--ph); z-index: 2;
         display: flex; align-items: center; gap: 10px;
@@ -966,8 +971,15 @@
         .hero-sub  { font-size: clamp(0.95rem, 3.2vw, 1.1rem) !important; max-width: 100% !important; }
         .hero-ctas { flex-direction: column !important; gap: 10px !important; }
         .hero-ctas .btn { width: 100% !important; text-align: center !important; }
+        .hero-micro { margin-top: 24px !important; gap: 8px !important; }
         .scroll-cue { display: none !important; }
         .hero-location { display: none !important; }
+
+        /* What happens over time — stack to 2 cols on tablet */
+        #what-we-do [style*="repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+
+        /* Execution Control — stack grid */
+        #execution-control [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
 
         /* Problem quote */
         #problem .wrap > div:last-of-type p { font-size: 0.95rem !important; }
@@ -1016,6 +1028,9 @@
         /* Hero tighter */
         .hero-body { padding-top: 120px !important; padding-bottom: 60px !important; }
         h1 { font-size: clamp(1.85rem, 8vw, 2.4rem) !important; }
+
+        /* What happens over time — single col on mobile */
+        #what-we-do [style*="repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
 
         /* Reduce section padding further */
         .sec { padding-top: 48px !important; padding-bottom: 48px !important; }
@@ -1168,10 +1183,10 @@
     <div class="hero-body wrap">
         <div class="hero-tag tag">The Operating Law of Disciplined Execution</div>
         <h1 class="hero-h1">
-            Your business works only<br>because you're there.
+            Your business should run.<br>Without you.
         </h1>
         <p class="hero-sub">
-            We install the system that makes it run — with or without you.
+            We make that happen.
         </p>
         <div class="hero-ctas">
             <a href="#contact" class="btn btn-g">Apply for Access</a>
@@ -1266,6 +1281,11 @@
 </section>
 
 
+<!-- Statement bar -->
+<div class="statement-bar r">
+    <span>We work with a limited number of businesses.</span>
+</div>
+
 <!-- ============================================================
      WHAT WE DO + PROCESS
 ============================================================ -->
@@ -1316,6 +1336,57 @@
                 </div>
             </div>
         </div>
+
+        <div style="margin-top:80px;border-top:1px solid rgba(0,0,0,0.1);padding-top:64px;">
+            <div class="r" style="margin-bottom:40px;">
+                <span class="tag" style="color:#0F2A1D;display:block;margin-bottom:12px;">What Happens Over Time</span>
+                <h2 style="color:#111;line-height:1.15;">A business that runs itself<br>is built in stages.</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+                <div class="r" style="background:#fff;padding:36px 30px;border-top:3px solid #C9B037;">
+                    <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9B037;margin-bottom:14px;">Month 1</div>
+                    <div style="font-size:1.35rem;font-weight:700;color:#111;margin-bottom:10px;">Structure</div>
+                    <p style="font-size:0.8rem;color:#555;line-height:1.75;margin:0;">Roles defined. Responsibilities assigned. The org chart reflects reality — not wishful thinking.</p>
+                </div>
+                <div class="r d1" style="background:#fff;padding:36px 30px;border-top:3px solid #C9B037;">
+                    <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9B037;margin-bottom:14px;">Month 2</div>
+                    <div style="font-size:1.35rem;font-weight:700;color:#111;margin-bottom:10px;">Process</div>
+                    <p style="font-size:0.8rem;color:#555;line-height:1.75;margin:0;">Critical operations documented and standardised. The business runs on system, not memory.</p>
+                </div>
+                <div class="r d2" style="background:#fff;padding:36px 30px;border-top:3px solid #C9B037;">
+                    <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9B037;margin-bottom:14px;">Month 3</div>
+                    <div style="font-size:1.35rem;font-weight:700;color:#111;margin-bottom:10px;">Control</div>
+                    <p style="font-size:0.8rem;color:#555;line-height:1.75;margin:0;">Metrics in place. Accountability enforced. The owner stops being the only person who knows what's happening.</p>
+                </div>
+                <div class="r d3" style="background:#fff;padding:36px 30px;border-top:3px solid #C9B037;">
+                    <div style="font-size:0.55rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9B037;margin-bottom:14px;">Month 6</div>
+                    <div style="font-size:1.35rem;font-weight:700;color:#111;margin-bottom:10px;">Scale</div>
+                    <p style="font-size:0.8rem;color:#555;line-height:1.75;margin:0;">The system carries the business forward. Growth becomes possible because operations no longer consume everything.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     EXECUTION CONTROL
+============================================================ -->
+<section id="execution-control" class="sec" style="background:#0a0a0a;">
+    <div class="wrap">
+        <div style="max-width:780px;margin:0 auto;">
+            <span class="tag" style="display:block;margin-bottom:24px;">Execution Control</span>
+            <h2 style="font-size:clamp(1.8rem,3.2vw,2.8rem);line-height:1.15;margin-bottom:36px;">Most businesses don't fail<br>from lack of strategy.</h2>
+            <p style="font-size:1.05rem;color:var(--muted);line-height:1.92;margin-bottom:0;">They fail from lack of execution discipline.</p>
+            <div style="margin:48px 0;display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+                <div style="background:#111;padding:36px 32px;border-left:3px solid #C9B037;">
+                    <p style="font-size:1rem;font-weight:600;color:var(--bone);line-height:1.5;margin:0;">Systems don't fail.<br>People stop following them.</p>
+                </div>
+                <div style="background:#111;padding:36px 32px;border-left:3px solid rgba(201,176,55,0.25);">
+                    <p style="font-size:0.88rem;color:var(--muted);line-height:1.85;margin:0;">ORDYX installs control layers that ensure execution — every day, without exception. Not reminders. Not dashboards. Enforced operating law.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1328,6 +1399,7 @@
         <div class="sec-hd r">
             <span class="tag">Who This Is For</span>
             <h2>Not built for everyone.<br>Built precisely for some.</h2>
+            <p class="sec-micro">Not every company qualifies.</p>
         </div>
         <div class="aud-grid">
             <div class="aud-col aud-for r">
@@ -1473,6 +1545,7 @@
         <div class="r" style="margin-bottom:52px;">
             <span class="tag" style="display:block;margin-bottom:16px;">Get In Touch</span>
             <h2 style="max-width:620px;line-height:1.08;">The right conversation<br>starts with the right request.</h2>
+            <p class="sec-micro" style="margin-top:16px;">We don't scale clients. We select them.</p>
         </div>
 
         <!-- Tabs -->
