@@ -1791,6 +1791,12 @@
                 <form class="qual-form" id="qualForm" onsubmit="submitQualStep(event)" novalidate>
 
                     <div class="fg">
+                        <label>Full Name</label>
+                        <input type="text" name="q_name" placeholder="Your full name" required autocomplete="name">
+                        <div class="qual-ferr" id="err-name">Please enter your full name.</div>
+                    </div>
+
+                    <div class="fg">
                         <label>Company Name</label>
                         <input type="text" name="q_company" placeholder="Your business or brand name" required>
                         <div class="qual-helper">Your business or brand name</div>
@@ -2055,6 +2061,7 @@
     function submitQualStep(e) {
         e.preventDefault();
         var data = new FormData(document.getElementById('qualForm'));
+        var fullName  = (data.get('q_name')       || '').trim();
         var company   = (data.get('q_company')   || '').trim();
         var role      = (data.get('q_role')       || '').trim();
         var revenue   = (data.get('q_revenue')    || '').trim();
@@ -2066,6 +2073,7 @@
         document.querySelectorAll('.qual-ferr').forEach(function(el) { el.style.display = 'none'; });
 
         var ok = true;
+        if (!fullName)              { document.getElementById('err-name').style.display     = 'block'; ok = false; }
         if (!company)               { document.getElementById('err-company').style.display  = 'block'; ok = false; }
         if (!role)                  { document.getElementById('err-role').style.display     = 'block'; ok = false; }
         if (!revenue)               { document.getElementById('err-revenue').style.display  = 'block'; ok = false; }
@@ -2078,7 +2086,10 @@
         if (!urgency) { document.getElementById('err-urgency').style.display = 'block'; ok = false; }
         if (!ok) return;
 
-        qualData = { company: company, role: role, revenue: revenue, challenge: challenge, email: email, urgency: urgency };
+        var nameParts = fullName.split(/\s+/);
+        var firstName = nameParts[0] || '';
+        var lastName  = nameParts.slice(1).join(' ') || '';
+        qualData = { firstName: firstName, lastName: lastName, fullName: fullName, company: company, role: role, revenue: revenue, challenge: challenge, email: email, urgency: urgency };
 
         document.getElementById('qual-step1').style.display = 'none';
         document.getElementById('qual-step2').style.display = 'block';
@@ -2098,8 +2109,8 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                first:   qualData.email.split('@')[0],
-                last:    '',
+                first:   qualData.firstName,
+                last:    qualData.lastName,
                 company: qualData.company,
                 email:   qualData.email,
                 phone:   '',

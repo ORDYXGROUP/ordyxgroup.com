@@ -65,31 +65,31 @@ module.exports = async function handler(req, res) {
 
   <!-- Wordmark -->
   <tr><td style="padding-bottom:52px">
-    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#c9a96e;text-transform:uppercase">ORDYX GROUP</span>
+    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#ffffff;text-transform:uppercase">ORDYX GROUP</span>
   </td></tr>
 
   <!-- Greeting -->
   <tr><td style="padding-bottom:10px">
-    <span style="font-size:14px;color:#555">Hi ${(name || '').split(' ')[0]},</span>
+    <span style="font-size:14px;color:#aaa">Hi ${(name || '').split(' ')[0]},</span>
   </td></tr>
 
   <!-- Headline -->
   <tr><td style="padding-bottom:20px">
-    <h1 style="margin:0;font-size:27px;font-weight:300;color:#f5f0e8;line-height:1.25;letter-spacing:-.01em">Thank you for reaching out.</h1>
+    <h1 style="margin:0;font-size:27px;font-weight:300;color:#f0ebe0;line-height:1.25;letter-spacing:-.01em">Thank you for reaching out.</h1>
   </td></tr>
 
   <!-- Divider -->
   <tr><td style="padding-bottom:32px">
-    <div style="height:1px;background:#1a1a1a"></div>
+    <div style="height:1px;background:#242424"></div>
   </td></tr>
 
   <!-- Body -->
   <tr><td style="padding-bottom:28px">
-    <p style="margin:0;font-size:15px;color:#666;line-height:1.8">We appreciate your interest in a strategy session. Unfortunately, we are not able to accommodate your request at this time — our current engagements are at capacity and we want to ensure every session receives the full attention it deserves.</p>
+    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.8">We appreciate your interest in a strategy session. Unfortunately, we are not able to accommodate your request at this time — our current engagements are at capacity and we want to ensure every session receives the full attention it deserves.</p>
   </td></tr>
 
   <tr><td style="padding-bottom:40px">
-    <p style="margin:0;font-size:15px;color:#555;line-height:1.8">We encourage you to try again next quarter, or submit a written inquiry if your situation is time-sensitive.</p>
+    <p style="margin:0;font-size:15px;color:#888;line-height:1.8">We encourage you to try again next quarter, or submit a written inquiry if your situation is time-sensitive.</p>
   </td></tr>
 
   <!-- CTA -->
@@ -98,8 +98,8 @@ module.exports = async function handler(req, res) {
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="border-top:1px solid #141414;padding-top:24px">
-    <p style="margin:0;font-size:11px;color:#2d2d2d;line-height:1.8">ORDYX GROUP &nbsp;·&nbsp; Frankfurt<br>Stefan Maksimovic</p>
+  <tr><td style="border-top:1px solid #222;padding-top:24px">
+    <p style="margin:0;font-size:11px;color:#555;line-height:1.8">ORDYX GROUP &nbsp;·&nbsp; Frankfurt<br>Stefan Maksimovic</p>
   </td></tr>
 
 </table>
