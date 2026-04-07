@@ -117,44 +117,101 @@ module.exports = async function handler(req, res) {
       await sendEmail({
         to:      email,
         subject: `Session Confirmed — ${dateDisplay} at ${time} CET`,
-        html: `<!DOCTYPE html><html><head><meta charset="utf-8">
-<style>
-  body{font-family:-apple-system,sans-serif;background:#0a0a0a;color:#f0ebe0;margin:0;padding:0}
-  .w{max-width:540px;margin:0 auto;padding:48px 24px}
-  .logo{font-size:11px;font-weight:700;letter-spacing:.15em;color:#c9a96e;margin-bottom:40px}
-  .badge{display:inline-block;background:rgba(45,106,79,0.15);border:1px solid #2d6a4f;color:#6fcf97;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:2px;margin-bottom:22px}
-  h1{font-size:26px;font-weight:600;margin:0 0 14px;line-height:1.3}
-  p{font-size:15px;color:#8a8a8a;line-height:1.7;margin:0 0 16px}
-  .slot{background:#161616;border-left:3px solid #c9a96e;padding:20px 24px;margin:24px 0;border-radius:2px}
-  .slot-date{font-size:19px;font-weight:600;color:#f0ebe0}
-  .slot-time{font-size:14px;color:#c9a96e;margin-top:5px}
-  .info{background:#111;border:1px solid #242424;border-radius:4px;padding:20px 24px;margin:24px 0}
-  .info-row{font-size:13px;color:#8a8a8a;line-height:1.9}
-  .info-row strong{color:#f0ebe0;font-weight:600}
-  .foot{font-size:12px;color:#4a4a4a;margin-top:36px;padding-top:18px;border-top:1px solid #1c1c1c;line-height:1.7}
-</style></head><body>
-<div class="w">
-  <div class="logo">ORDYX GROUP</div>
-  <div class="badge">✓ Confirmed</div>
-  <h1>Your session is confirmed.</h1>
-  <p>We look forward to speaking with you, ${(name || '').split(' ')[0]}. A calendar invite is attached — add it with one click.</p>
-  <div class="slot">
-    <div class="slot-date">${dateDisplay}</div>
-    <div class="slot-time">${time} CET &nbsp;·&nbsp; 30 minutes</div>
-  </div>
-  <div class="info">
-    <div class="info-row"><strong>Format</strong> &nbsp;— Video call (link shared 1 hour before)</div>
-    <div class="info-row"><strong>Duration</strong> &nbsp;— 30 minutes</div>
-    <div class="info-row"><strong>Preparation</strong> &nbsp;— No preparation required. Come as you are.</div>
-  </div>
-  <p style="font-style:italic;color:#6a6a6a">This is not a sales call. It's a structured working session focused on diagnosing what's limiting your business.</p>
-  <div class="foot">Questions? Simply reply to this email.<br>ORDYX GROUP &nbsp;·&nbsp; Frankfurt<br>Stefan Maksimovic</div>
-</div></body></html>`,
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Session Confirmed — ORDYX GROUP</title>
+</head>
+<body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
+<tr><td align="center" style="padding:48px 24px 56px">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px">
+
+  <!-- Wordmark -->
+  <tr><td style="padding-bottom:52px">
+    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#c9a96e;text-transform:uppercase">ORDYX GROUP</span>
+  </td></tr>
+
+  <!-- Status line -->
+  <tr><td style="padding-bottom:10px">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:#4a7c5f;text-transform:uppercase">Session Confirmed</span>
+  </td></tr>
+
+  <!-- Headline -->
+  <tr><td style="padding-bottom:20px">
+    <h1 style="margin:0;font-size:28px;font-weight:300;color:#f5f0e8;line-height:1.25;letter-spacing:-.01em">Your session is scheduled.</h1>
+  </td></tr>
+
+  <!-- Intro -->
+  <tr><td style="padding-bottom:36px">
+    <p style="margin:0;font-size:15px;color:#666;line-height:1.75">We look forward to speaking with you, ${(name || '').split(' ')[0]}. A calendar invite is attached to this email.</p>
+  </td></tr>
+
+  <!-- Divider -->
+  <tr><td style="padding-bottom:36px">
+    <div style="height:1px;background:#1e1e1e"></div>
+  </td></tr>
+
+  <!-- Date block -->
+  <tr><td style="padding-bottom:8px">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.14em;color:#4a4a4a;text-transform:uppercase">Date &amp; Time</span>
+  </td></tr>
+  <tr><td style="padding-bottom:6px">
+    <span style="font-size:22px;font-weight:400;color:#f5f0e8;letter-spacing:-.01em">${dateDisplay}</span>
+  </td></tr>
+  <tr><td style="padding-bottom:40px">
+    <span style="font-size:14px;color:#c9a96e;letter-spacing:.04em">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30 minutes</span>
+  </td></tr>
+
+  <!-- Details block -->
+  <tr><td style="padding-bottom:36px">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="padding:18px 0;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a">
+          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td style="width:50%;padding-right:16px;vertical-align:top">
+                <div style="font-size:10px;font-weight:600;letter-spacing:.12em;color:#3a3a3a;text-transform:uppercase;margin-bottom:6px">Format</div>
+                <div style="font-size:13px;color:#888;line-height:1.5">Video call<br>Link shared 1 hr before</div>
+              </td>
+              <td style="width:50%;padding-left:16px;vertical-align:top;border-left:1px solid #1a1a1a">
+                <div style="font-size:10px;font-weight:600;letter-spacing:.12em;color:#3a3a3a;text-transform:uppercase;margin-bottom:6px">Preparation</div>
+                <div style="font-size:13px;color:#888;line-height:1.5">None required.<br>Come as you are.</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <!-- Note -->
+  <tr><td style="padding-bottom:52px">
+    <p style="margin:0;font-size:13px;color:#3d3d3d;line-height:1.7;font-style:italic">This is not a sales call. It is a structured diagnostic session focused on what is limiting your business.</p>
+  </td></tr>
+
+  <!-- Footer divider -->
+  <tr><td style="padding-bottom:24px">
+    <div style="height:1px;background:#141414"></div>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td>
+    <p style="margin:0;font-size:11px;color:#333;line-height:1.8">Questions? Reply directly to this email.<br>ORDYX GROUP &nbsp;·&nbsp; Frankfurt &nbsp;·&nbsp; Stefan Maksimovic</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`,
         attachments: [{
-          filename:    'ordyx-session.ics',
-          content:     icsBase64,
-          type:        'text/calendar',
-          disposition: 'attachment',
+          filename:     'ordyx-session.ics',
+          content:      icsBase64,
+          content_type: 'text/calendar',
+          disposition:  'attachment',
         }],
       });
     }

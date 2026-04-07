@@ -111,48 +111,122 @@ module.exports = async function handler(req, res) {
         await sendEmail({
           to:      stefanEmail,
           subject: `[New Booking] ${name} · ${company} · ${dateDisplay} ${time}`,
-          html: `<!DOCTYPE html><html><head><meta charset="utf-8">
-<style>
-  body{font-family:-apple-system,sans-serif;background:#0a0a0a;color:#f0ebe0;margin:0;padding:0}
-  .w{max-width:600px;margin:0 auto;padding:40px 24px}
-  .label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9a96e;margin-bottom:6px}
-  h1{font-size:26px;font-weight:600;margin:0 0 6px}
-  .sub{color:#8a8a8a;font-size:14px;margin-bottom:28px}
-  .slot{background:#111;border:1px solid #c9a96e;border-radius:4px;padding:18px 22px;margin-bottom:24px}
-  .slot-date{font-size:20px;font-weight:600}
-  .slot-time{color:#c9a96e;font-size:14px;margin-top:4px}
-  .card{background:#161616;border:1px solid #242424;border-radius:4px;padding:22px;margin-bottom:24px}
-  .fl{margin-bottom:14px}
-  .fl-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a4a4a;margin-bottom:3px}
-  .fl-val{font-size:14px;color:#f0ebe0}
-  .desc{font-size:13px;color:#8a8a8a;line-height:1.65;white-space:pre-wrap}
-  .btns{display:flex;gap:12px;margin-top:4px}
-  .btn{display:inline-block;padding:14px 28px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;text-align:center}
-  .btn-ok{background:#c9a96e;color:#0a0a0a}
-  .btn-no{background:transparent;color:#8a8a8a;border:1px solid #333}
-  .foot{font-size:12px;color:#4a4a4a;margin-top:36px;padding-top:18px;border-top:1px solid #1c1c1c}
-</style></head><body>
-<div class="w">
-  <div class="label">Strategy Session — New Request</div>
-  <h1>New Booking Request</h1>
-  <p class="sub">Review below and confirm or decline.</p>
-  <div class="slot">
-    <div class="slot-date">${dateDisplay}</div>
-    <div class="slot-time">${time} CET &nbsp;·&nbsp; 30 minutes</div>
-  </div>
-  <div class="card">
-    <div class="fl"><div class="fl-label">Name</div><div class="fl-val">${name}</div></div>
-    <div class="fl"><div class="fl-label">Company</div><div class="fl-val">${company}</div></div>
-    <div class="fl"><div class="fl-label">Email</div><div class="fl-val">${email}</div></div>
-    ${phone ? `<div class="fl"><div class="fl-label">Phone</div><div class="fl-val">${phone}</div></div>` : ''}
-    ${desc  ? `<div class="fl"><div class="fl-label">Challenge / Context</div><div class="desc">${desc}</div></div>` : ''}
-  </div>
-  <div class="btns">
-    <a href="${confirmUrl}" class="btn btn-ok">✓ &nbsp; Confirm Session</a>
-    <a href="${declineUrl}" class="btn btn-no">✕ &nbsp; Decline</a>
-  </div>
-  <div class="foot">ORDYX GROUP · Internal Notification<br>Clicking Confirm sends the client a calendar invite automatically.</div>
-</div></body></html>`,
+          html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New Session Request — ORDYX GROUP</title>
+</head>
+<body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
+<tr><td align="center" style="padding:48px 24px 56px">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">
+
+  <!-- Wordmark -->
+  <tr><td style="padding-bottom:48px">
+    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#c9a96e;text-transform:uppercase">ORDYX GROUP</span>
+  </td></tr>
+
+  <!-- Label -->
+  <tr><td style="padding-bottom:10px">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:#4a4a4a;text-transform:uppercase">Strategy Session &nbsp;·&nbsp; New Request</span>
+  </td></tr>
+
+  <!-- Headline -->
+  <tr><td style="padding-bottom:8px">
+    <h1 style="margin:0;font-size:28px;font-weight:300;color:#f5f0e8;line-height:1.25;letter-spacing:-.01em">New booking request.</h1>
+  </td></tr>
+
+  <tr><td style="padding-bottom:40px">
+    <p style="margin:0;font-size:14px;color:#444;line-height:1.6">Review the request below and confirm or decline.</p>
+  </td></tr>
+
+  <!-- Divider -->
+  <tr><td style="padding-bottom:36px">
+    <div style="height:1px;background:#1a1a1a"></div>
+  </td></tr>
+
+  <!-- Date -->
+  <tr><td style="padding-bottom:6px">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.14em;color:#3a3a3a;text-transform:uppercase">Requested Slot</span>
+  </td></tr>
+  <tr><td style="padding-bottom:6px">
+    <span style="font-size:21px;font-weight:400;color:#f5f0e8;letter-spacing:-.01em">${dateDisplay}</span>
+  </td></tr>
+  <tr><td style="padding-bottom:40px">
+    <span style="font-size:13px;color:#c9a96e;letter-spacing:.04em">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30 minutes</span>
+  </td></tr>
+
+  <!-- Client details -->
+  <tr><td style="padding-bottom:28px">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr><td style="padding:20px 0 0;border-top:1px solid #161616">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="width:50%;padding:0 20px 20px 0;vertical-align:top">
+              <div style="font-size:9px;font-weight:600;letter-spacing:.15em;color:#333;text-transform:uppercase;margin-bottom:7px">Name</div>
+              <div style="font-size:14px;color:#d4cfc6;font-weight:400">${name}</div>
+            </td>
+            <td style="width:50%;padding:0 0 20px 20px;vertical-align:top;border-left:1px solid #161616">
+              <div style="font-size:9px;font-weight:600;letter-spacing:.15em;color:#333;text-transform:uppercase;margin-bottom:7px">Company</div>
+              <div style="font-size:14px;color:#d4cfc6;font-weight:400">${company}</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:50%;padding:16px 20px 0 0;vertical-align:top;border-top:1px solid #161616">
+              <div style="font-size:9px;font-weight:600;letter-spacing:.15em;color:#333;text-transform:uppercase;margin-bottom:7px">Email</div>
+              <div style="font-size:13px;color:#888;font-weight:400">${email}</div>
+            </td>
+            ${phone ? `<td style="width:50%;padding:16px 0 0 20px;vertical-align:top;border-top:1px solid #161616;border-left:1px solid #161616">
+              <div style="font-size:9px;font-weight:600;letter-spacing:.15em;color:#333;text-transform:uppercase;margin-bottom:7px">Phone</div>
+              <div style="font-size:13px;color:#888;font-weight:400">${phone}</div>
+            </td>` : '<td style="border-top:1px solid #161616"></td>'}
+          </tr>
+          ${desc ? `<tr>
+            <td colspan="2" style="padding:20px 0 0;border-top:1px solid #161616">
+              <div style="font-size:9px;font-weight:600;letter-spacing:.15em;color:#333;text-transform:uppercase;margin-bottom:9px">Challenge / Context</div>
+              <div style="font-size:13px;color:#666;line-height:1.75;white-space:pre-wrap">${desc}</div>
+            </td>
+          </tr>` : ''}
+        </table>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Divider -->
+  <tr><td style="padding-bottom:36px">
+    <div style="height:1px;background:#1a1a1a"></div>
+  </td></tr>
+
+  <!-- Action buttons -->
+  <tr><td style="padding-bottom:16px">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="padding-right:12px">
+          <a href="${confirmUrl}" style="display:inline-block;padding:13px 32px;background:#c9a96e;color:#080808;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Confirm Session</a>
+        </td>
+        <td>
+          <a href="${declineUrl}" style="display:inline-block;padding:12px 28px;background:transparent;color:#4a4a4a;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1px solid #2a2a2a">Decline</a>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding-bottom:48px">
+    <p style="margin:0;font-size:11px;color:#2d2d2d;line-height:1.6">Confirming will automatically send the client a calendar invite.</p>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="border-top:1px solid #141414;padding-top:24px">
+    <p style="margin:0;font-size:11px;color:#2a2a2a;line-height:1.8">ORDYX GROUP &nbsp;·&nbsp; Internal Notification</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`,
         });
       } catch (e) {
         console.error('[book] Stefan email error:', e.message);
@@ -163,30 +237,70 @@ module.exports = async function handler(req, res) {
         await sendEmail({
           to:      email,
           subject: 'Your Strategy Session Request — ORDYX GROUP',
-          html: `<!DOCTYPE html><html><head><meta charset="utf-8">
-<style>
-  body{font-family:-apple-system,sans-serif;background:#0a0a0a;color:#f0ebe0;margin:0;padding:0}
-  .w{max-width:540px;margin:0 auto;padding:48px 24px}
-  .logo{font-size:11px;font-weight:700;letter-spacing:.15em;color:#c9a96e;margin-bottom:40px}
-  h1{font-size:26px;font-weight:600;margin:0 0 14px;line-height:1.3}
-  p{font-size:15px;color:#8a8a8a;line-height:1.7;margin:0 0 16px}
-  .slot{background:#161616;border-left:3px solid #c9a96e;padding:18px 22px;margin:24px 0;border-radius:2px}
-  .slot-date{font-size:18px;font-weight:600;color:#f0ebe0}
-  .slot-time{font-size:14px;color:#c9a96e;margin-top:5px}
-  .foot{font-size:12px;color:#4a4a4a;margin-top:36px;padding-top:18px;border-top:1px solid #1c1c1c}
-</style></head><body>
-<div class="w">
-  <div class="logo">ORDYX GROUP</div>
-  <h1>We received your session request.</h1>
-  <p>Thank you, ${name.split(' ')[0]}. We review every request personally and will confirm your slot within 24 hours.</p>
-  <div class="slot">
-    <div class="slot-date">${dateDisplay}</div>
-    <div class="slot-time">${time} CET &nbsp;·&nbsp; 30-minute working session</div>
-  </div>
-  <p>Once confirmed, you will receive a calendar invite and further details by email.</p>
-  <p style="font-style:italic;color:#6a6a6a">This is not a sales call. It's a structured working session.</p>
-  <div class="foot">Questions? Reply directly to this email.<br>ORDYX GROUP · Frankfurt</div>
-</div></body></html>`,
+          html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Session Request Received — ORDYX GROUP</title>
+</head>
+<body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
+<tr><td align="center" style="padding:48px 24px 56px">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px">
+
+  <!-- Wordmark -->
+  <tr><td style="padding-bottom:52px">
+    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#c9a96e;text-transform:uppercase">ORDYX GROUP</span>
+  </td></tr>
+
+  <!-- Label -->
+  <tr><td style="padding-bottom:10px">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:#4a4a4a;text-transform:uppercase">Request Received</span>
+  </td></tr>
+
+  <!-- Headline -->
+  <tr><td style="padding-bottom:20px">
+    <h1 style="margin:0;font-size:27px;font-weight:300;color:#f5f0e8;line-height:1.25;letter-spacing:-.01em">We have your request.</h1>
+  </td></tr>
+
+  <!-- Body -->
+  <tr><td style="padding-bottom:36px">
+    <p style="margin:0;font-size:15px;color:#666;line-height:1.75">Thank you, ${name.split(' ')[0]}. We review every request personally and will confirm your slot within 24 hours.</p>
+  </td></tr>
+
+  <!-- Divider -->
+  <tr><td style="padding-bottom:36px">
+    <div style="height:1px;background:#1a1a1a"></div>
+  </td></tr>
+
+  <!-- Date block -->
+  <tr><td style="padding-bottom:8px">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.14em;color:#3a3a3a;text-transform:uppercase">Requested Slot</span>
+  </td></tr>
+  <tr><td style="padding-bottom:6px">
+    <span style="font-size:21px;font-weight:400;color:#f5f0e8;letter-spacing:-.01em">${dateDisplay}</span>
+  </td></tr>
+  <tr><td style="padding-bottom:40px">
+    <span style="font-size:13px;color:#c9a96e;letter-spacing:.04em">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30-minute working session</span>
+  </td></tr>
+
+  <!-- Next steps -->
+  <tr><td style="padding-bottom:48px">
+    <p style="margin:0;font-size:14px;color:#555;line-height:1.75">Once confirmed, you will receive a calendar invite and further details by email.</p>
+    <p style="margin:16px 0 0;font-size:13px;color:#333;line-height:1.7;font-style:italic">This is not a sales call. It is a structured working session.</p>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="border-top:1px solid #141414;padding-top:24px">
+    <p style="margin:0;font-size:11px;color:#2d2d2d;line-height:1.8">Questions? Reply directly to this email.<br>ORDYX GROUP &nbsp;·&nbsp; Frankfurt</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`,
         });
       } catch (e) {
         console.error('[book] Client email error:', e.message);
