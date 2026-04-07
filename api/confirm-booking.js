@@ -35,7 +35,7 @@ function buildICS({ name, email, date, time }) {
   function fmt(dt) { return dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'; }
 
   const uid      = `booking-${date}-${time.replace(':', '')}-${email.split('@')[0]}@ordyxgroup.com`;
-  const fromMail = process.env.STEFAN_EMAIL || 'stefan@ordyxgroup.com';
+  const fromMail = process.env.STEFAN_EMAIL || 'management@ordyxgroup.com';
 
   return [
     'BEGIN:VCALENDAR',
@@ -66,11 +66,8 @@ function buildICS({ name, email, date, time }) {
 }
 
 async function sendEmail({ to, subject, html, attachments }) {
-  const configuredFrom = process.env.FROM_EMAIL || '';
-  const from = configuredFrom.includes('ordyxgroup.com')
-    ? 'ORDYX GROUP <onboarding@resend.dev>'
-    : (configuredFrom || 'ORDYX GROUP <onboarding@resend.dev>');
-  const replyTo = process.env.STEFAN_EMAIL || 'stefan@ordyxgroup.com';
+  const from    = process.env.FROM_EMAIL || 'ORDYX GROUP <management@ordyxgroup.com>';
+  const replyTo = process.env.STEFAN_EMAIL || 'management@ordyxgroup.com';
 
   const body = { from, to, subject, html, reply_to: replyTo };
   if (attachments) body.attachments = attachments;
