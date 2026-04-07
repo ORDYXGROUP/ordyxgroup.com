@@ -120,17 +120,21 @@ module.exports = async function handler(req, res) {
 </head>
 <body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
-<tr><td align="center" style="padding:48px 24px 56px">
+<tr><td align="center" style="padding:0 24px 64px">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">
 
-  <!-- Wordmark -->
+  <!-- Header -->
+  <tr><td style="padding:40px 0 28px">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#c9a96e;text-transform:uppercase;line-height:1">ORDYX GROUP</div>
+  </td></tr>
+  <!-- Gold rule -->
   <tr><td style="padding-bottom:48px">
-    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#c9a96e;text-transform:uppercase">ORDYX GROUP</span>
+    <div style="height:2px;background:linear-gradient(90deg,#c9a96e 0%,#a8843a 100%);width:64px"></div>
   </td></tr>
 
   <!-- Label -->
   <tr><td style="padding-bottom:10px">
-    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:#666;text-transform:uppercase">Strategy Session &nbsp;·&nbsp; New Request</span>
+    <span style="font-size:9px;font-weight:700;letter-spacing:.2em;color:#666;text-transform:uppercase">Strategy Session &nbsp;·&nbsp; New Request</span>
   </td></tr>
 
   <!-- Headline -->
@@ -246,54 +250,56 @@ module.exports = async function handler(req, res) {
 </head>
 <body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
-<tr><td align="center" style="padding:48px 24px 56px">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px">
+<tr><td align="center" style="padding:0 24px 64px">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">
 
-  <!-- Wordmark -->
+  <!-- Header -->
+  <tr><td style="padding:40px 0 28px">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#ffffff;text-transform:uppercase;line-height:1">ORDYX GROUP</div>
+  </td></tr>
+  <!-- Gold rule -->
   <tr><td style="padding-bottom:52px">
-    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#ffffff;text-transform:uppercase">ORDYX GROUP</span>
+    <div style="height:2px;background:linear-gradient(90deg,#c9a96e 0%,#a8843a 100%);width:64px"></div>
   </td></tr>
 
   <!-- Label -->
-  <tr><td style="padding-bottom:10px">
-    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:#666;text-transform:uppercase">Request Received</span>
+  <tr><td style="padding-bottom:12px">
+    <span style="font-size:9px;font-weight:700;letter-spacing:.2em;color:#666;text-transform:uppercase">Request Received</span>
   </td></tr>
 
   <!-- Headline -->
-  <tr><td style="padding-bottom:20px">
-    <h1 style="margin:0;font-size:27px;font-weight:300;color:#f0ebe0;line-height:1.25;letter-spacing:-.01em">We have your request.</h1>
+  <tr><td style="padding-bottom:16px">
+    <h1 style="margin:0;font-size:32px;font-weight:300;color:#f0ebe0;line-height:1.2;letter-spacing:-.02em">We have your request.</h1>
   </td></tr>
 
   <!-- Body -->
-  <tr><td style="padding-bottom:36px">
-    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.8">Thank you, ${name.split(' ')[0]}. We review every request personally and will confirm your slot within 24 hours.</p>
-  </td></tr>
-
-  <!-- Divider -->
-  <tr><td style="padding-bottom:36px">
-    <div style="height:1px;background:#242424"></div>
+  <tr><td style="padding-bottom:48px">
+    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.85">Thank you, ${name.split(' ')[0]}. We review every request personally and will confirm your slot within 24 hours.</p>
   </td></tr>
 
   <!-- Date block -->
+  <tr><td style="padding-bottom:6px;border-top:1px solid #242424;padding-top:36px">
+    <span style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#666;text-transform:uppercase">Requested Slot</span>
+  </td></tr>
   <tr><td style="padding-bottom:8px">
-    <span style="font-size:10px;font-weight:600;letter-spacing:.14em;color:#666;text-transform:uppercase">Requested Slot</span>
+    <span style="font-size:26px;font-weight:500;color:#ffffff;letter-spacing:-.01em">${dateDisplay}</span>
   </td></tr>
-  <tr><td style="padding-bottom:6px">
-    <span style="font-size:21px;font-weight:400;color:#f0ebe0;letter-spacing:-.01em">${dateDisplay}</span>
-  </td></tr>
-  <tr><td style="padding-bottom:40px">
-    <span style="font-size:13px;color:#c9a96e;letter-spacing:.04em">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30-minute working session</span>
+  <tr><td style="padding-bottom:48px">
+    <span style="font-size:14px;color:#c9a96e;letter-spacing:.06em;font-weight:500">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30-minute working session</span>
   </td></tr>
 
   <!-- Next steps -->
-  <tr><td style="padding-bottom:48px">
-    <p style="margin:0;font-size:14px;color:#aaa;line-height:1.8">Once confirmed, you will receive a calendar invite and further details by email.</p>
-    <p style="margin:20px 0 0;font-size:13px;color:#666;line-height:1.7;font-style:italic">This is not a sales call. It is a structured working session.</p>
+  <tr><td style="padding-bottom:16px;border-top:1px solid #242424;padding-top:32px">
+    <p style="margin:0;font-size:14px;color:#c8c2b8;line-height:1.85">Once confirmed, you will receive a calendar invite and further details by email.</p>
+  </td></tr>
+  <tr><td style="padding-bottom:52px">
+    <p style="margin:0;font-size:13px;color:#555;line-height:1.8;font-style:italic">This is not a sales call. It is a structured working session.</p>
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="border-top:1px solid #222;padding-top:24px">
-    <p style="margin:0;font-size:11px;color:#555;line-height:1.8">Questions? Reply directly to this email.<br>ORDYX GROUP &nbsp;·&nbsp; Frankfurt</p>
+  <tr><td style="border-top:1px solid #1e1e1e;padding-top:28px">
+    <p style="margin:0 0 4px;font-size:11px;color:#888;line-height:1.9">Questions? Reply directly to this email.</p>
+    <p style="margin:0;font-size:11px;color:#444;line-height:1.9">ORDYX GROUP &nbsp;·&nbsp; Frankfurt</p>
   </td></tr>
 
 </table>

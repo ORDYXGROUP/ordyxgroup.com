@@ -60,46 +60,51 @@ module.exports = async function handler(req, res) {
 </head>
 <body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
-<tr><td align="center" style="padding:48px 24px 56px">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px">
+<tr><td align="center" style="padding:0 24px 64px">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">
 
-  <!-- Wordmark -->
+  <!-- Header -->
+  <tr><td style="padding:40px 0 28px">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#ffffff;text-transform:uppercase;line-height:1">ORDYX GROUP</div>
+  </td></tr>
+  <!-- Gold rule -->
   <tr><td style="padding-bottom:52px">
-    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#ffffff;text-transform:uppercase">ORDYX GROUP</span>
+    <div style="height:2px;background:linear-gradient(90deg,#c9a96e 0%,#a8843a 100%);width:64px"></div>
   </td></tr>
 
   <!-- Greeting -->
-  <tr><td style="padding-bottom:10px">
-    <span style="font-size:14px;color:#aaa">Hi ${(name || '').split(' ')[0]},</span>
+  <tr><td style="padding-bottom:12px">
+    <span style="font-size:15px;color:#888">Hi ${(name || '').split(' ')[0]},</span>
   </td></tr>
 
   <!-- Headline -->
-  <tr><td style="padding-bottom:20px">
-    <h1 style="margin:0;font-size:27px;font-weight:300;color:#f0ebe0;line-height:1.25;letter-spacing:-.01em">Thank you for reaching out.</h1>
+  <tr><td style="padding-bottom:16px">
+    <h1 style="margin:0;font-size:32px;font-weight:300;color:#f0ebe0;line-height:1.2;letter-spacing:-.02em">Thank you for reaching out.</h1>
   </td></tr>
 
   <!-- Divider -->
-  <tr><td style="padding-bottom:32px">
+  <tr><td style="padding-bottom:36px">
     <div style="height:1px;background:#242424"></div>
   </td></tr>
 
   <!-- Body -->
-  <tr><td style="padding-bottom:28px">
-    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.8">We appreciate your interest in a strategy session. Unfortunately, we are not able to accommodate your request at this time — our current engagements are at capacity and we want to ensure every session receives the full attention it deserves.</p>
+  <tr><td style="padding-bottom:24px">
+    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.85">We appreciate your interest in a strategy session. Unfortunately, we are not able to accommodate your request at this time — our current engagements are at capacity and we want to ensure every session receives the full attention it deserves.</p>
   </td></tr>
 
-  <tr><td style="padding-bottom:40px">
-    <p style="margin:0;font-size:15px;color:#888;line-height:1.8">We encourage you to try again next quarter, or submit a written inquiry if your situation is time-sensitive.</p>
+  <tr><td style="padding-bottom:44px">
+    <p style="margin:0;font-size:15px;color:#888;line-height:1.85">We encourage you to try again next quarter, or submit a written inquiry if your situation is time-sensitive.</p>
   </td></tr>
 
   <!-- CTA -->
-  <tr><td style="padding-bottom:52px">
-    <a href="${process.env.SITE_URL || 'https://ordyxgroup.com'}/#contact" style="display:inline-block;padding:13px 32px;background:#c9a96e;color:#080808;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Submit a Written Inquiry</a>
+  <tr><td style="padding-bottom:56px">
+    <a href="${process.env.SITE_URL || 'https://ordyxgroup.com'}/#contact" style="display:inline-block;padding:14px 36px;background:#c9a96e;color:#080808;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none">Submit a Written Inquiry</a>
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="border-top:1px solid #222;padding-top:24px">
-    <p style="margin:0;font-size:11px;color:#555;line-height:1.8">ORDYX GROUP &nbsp;·&nbsp; Frankfurt<br>Stefan Maksimovic</p>
+  <tr><td style="border-top:1px solid #1e1e1e;padding-top:28px">
+    <p style="margin:0 0 4px;font-size:11px;color:#888;line-height:1.9">ORDYX GROUP &nbsp;·&nbsp; Frankfurt</p>
+    <p style="margin:0;font-size:11px;color:#444;line-height:1.9">Stefan Maksimovic</p>
   </td></tr>
 
 </table>

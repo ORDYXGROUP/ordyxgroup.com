@@ -126,62 +126,55 @@ module.exports = async function handler(req, res) {
 </head>
 <body style="margin:0;padding:0;background:#080808;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#080808">
-<tr><td align="center" style="padding:48px 24px 56px">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px">
+<tr><td align="center" style="padding:0 24px 64px">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">
 
-  <!-- Wordmark -->
+  <!-- Header bar -->
+  <tr><td style="padding:40px 0 28px">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#ffffff;text-transform:uppercase;line-height:1">ORDYX GROUP</div>
+  </td></tr>
+  <!-- Gold rule -->
   <tr><td style="padding-bottom:52px">
-    <span style="font-size:10px;font-weight:700;letter-spacing:.22em;color:#ffffff;text-transform:uppercase">ORDYX GROUP</span>
+    <div style="height:2px;background:linear-gradient(90deg,#c9a96e 0%,#a8843a 100%);width:64px"></div>
   </td></tr>
 
-  <!-- Status line -->
-  <tr><td style="padding-bottom:10px">
-    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:#5a9a70;text-transform:uppercase">Session Confirmed</span>
+  <!-- Status tag -->
+  <tr><td style="padding-bottom:12px">
+    <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:.2em;color:#5a9a70;text-transform:uppercase;border:1px solid #2a5a3a;padding:5px 12px">SESSION CONFIRMED</span>
   </td></tr>
 
   <!-- Headline -->
-  <tr><td style="padding-bottom:20px">
-    <h1 style="margin:0;font-size:28px;font-weight:300;color:#f0ebe0;line-height:1.25;letter-spacing:-.01em">Your session is scheduled.</h1>
+  <tr><td style="padding-bottom:16px">
+    <h1 style="margin:0;font-size:32px;font-weight:300;color:#f0ebe0;line-height:1.2;letter-spacing:-.02em">Your session is scheduled.</h1>
   </td></tr>
 
   <!-- Intro -->
-  <tr><td style="padding-bottom:36px">
-    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.8">We look forward to speaking with you, ${(name || '').split(' ')[0]}. A calendar invite is attached to this email.</p>
-  </td></tr>
-
-  <!-- Divider -->
-  <tr><td style="padding-bottom:36px">
-    <div style="height:1px;background:#242424"></div>
+  <tr><td style="padding-bottom:48px">
+    <p style="margin:0;font-size:15px;color:#aaa;line-height:1.85">We look forward to speaking with you, ${(name || '').split(' ')[0]}. A calendar invite is attached to this email.</p>
   </td></tr>
 
   <!-- Date block -->
+  <tr><td style="padding-bottom:6px;border-top:1px solid #242424;padding-top:36px">
+    <span style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#666;text-transform:uppercase">Date &amp; Time</span>
+  </td></tr>
   <tr><td style="padding-bottom:8px">
-    <span style="font-size:10px;font-weight:600;letter-spacing:.14em;color:#666;text-transform:uppercase">Date &amp; Time</span>
+    <span style="font-size:26px;font-weight:500;color:#ffffff;letter-spacing:-.01em">${dateDisplay}</span>
   </td></tr>
-  <tr><td style="padding-bottom:6px">
-    <span style="font-size:22px;font-weight:400;color:#f0ebe0;letter-spacing:-.01em">${dateDisplay}</span>
-  </td></tr>
-  <tr><td style="padding-bottom:40px">
-    <span style="font-size:14px;color:#c9a96e;letter-spacing:.04em">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30 minutes</span>
+  <tr><td style="padding-bottom:48px">
+    <span style="font-size:14px;color:#c9a96e;letter-spacing:.06em;font-weight:500">${time} CET &nbsp;&nbsp;·&nbsp;&nbsp; 30 minutes</span>
   </td></tr>
 
   <!-- Details block -->
-  <tr><td style="padding-bottom:36px">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr><td style="padding-bottom:48px">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #242424">
       <tr>
-        <td style="padding:18px 0;border-top:1px solid #242424;border-bottom:1px solid #242424">
-          <table width="100%" cellpadding="0" cellspacing="0" border="0">
-            <tr>
-              <td style="width:50%;padding-right:16px;vertical-align:top">
-                <div style="font-size:10px;font-weight:600;letter-spacing:.12em;color:#666;text-transform:uppercase;margin-bottom:6px">Format</div>
-                <div style="font-size:13px;color:#aaa;line-height:1.6">Video call<br>Link shared 1 hr before</div>
-              </td>
-              <td style="width:50%;padding-left:16px;vertical-align:top;border-left:1px solid #242424">
-                <div style="font-size:10px;font-weight:600;letter-spacing:.12em;color:#666;text-transform:uppercase;margin-bottom:6px">Preparation</div>
-                <div style="font-size:13px;color:#aaa;line-height:1.6">None required.<br>Come as you are.</div>
-              </td>
-            </tr>
-          </table>
+        <td style="width:50%;padding:24px 32px 24px 0;vertical-align:top;border-bottom:1px solid #242424">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#666;text-transform:uppercase;margin-bottom:10px">Format</div>
+          <div style="font-size:14px;color:#c8c2b8;line-height:1.7">Video call<br>Link shared 1 hr before</div>
+        </td>
+        <td style="width:50%;padding:24px 0 24px 32px;vertical-align:top;border-bottom:1px solid #242424;border-left:1px solid #242424">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#666;text-transform:uppercase;margin-bottom:10px">Preparation</div>
+          <div style="font-size:14px;color:#c8c2b8;line-height:1.7">None required.<br>Come as you are.</div>
         </td>
       </tr>
     </table>
@@ -189,17 +182,13 @@ module.exports = async function handler(req, res) {
 
   <!-- Note -->
   <tr><td style="padding-bottom:52px">
-    <p style="margin:0;font-size:13px;color:#666;line-height:1.7;font-style:italic">This is not a sales call. It is a structured diagnostic session focused on what is limiting your business.</p>
-  </td></tr>
-
-  <!-- Footer divider -->
-  <tr><td style="padding-bottom:24px">
-    <div style="height:1px;background:#222"></div>
+    <p style="margin:0;font-size:13px;color:#555;line-height:1.8;font-style:italic">This is not a sales call. It is a structured diagnostic session focused on what is limiting your business.</p>
   </td></tr>
 
   <!-- Footer -->
-  <tr><td>
-    <p style="margin:0;font-size:11px;color:#555;line-height:1.8">Questions? Reply directly to this email.<br>ORDYX GROUP &nbsp;·&nbsp; Frankfurt &nbsp;·&nbsp; Stefan Maksimovic</p>
+  <tr><td style="border-top:1px solid #1e1e1e;padding-top:28px">
+    <p style="margin:0 0 4px;font-size:11px;color:#888;line-height:1.9">Questions? Reply directly to this email.</p>
+    <p style="margin:0;font-size:11px;color:#444;line-height:1.9">ORDYX GROUP &nbsp;·&nbsp; Frankfurt &nbsp;·&nbsp; Stefan Maksimovic</p>
   </td></tr>
 
 </table>
