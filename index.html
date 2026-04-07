@@ -714,18 +714,103 @@
     .form-ok h3 { margin-bottom: 12px; color: #fff; }
     .form-ok p { font-size: 0.87rem; color: var(--muted); }
 
-    /* Contact tabs */
-    .contact-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 64px; }
-    .ctab {
-        font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-        color: var(--dim); padding: 14px 32px; border: none; background: transparent;
-        cursor: pointer; transition: color 0.22s; border-bottom: 2px solid transparent;
-        margin-bottom: -1px; font-family: var(--f);
-    }
-    .ctab.active { color: var(--bone); border-bottom-color: var(--gold); }
-    .ctab:hover:not(.active) { color: rgba(242,242,238,0.75); }
+    /* ── Contact Split Layout (60/40) ── */
+    .contact-split { display: grid; grid-template-columns: 3fr 2fr; gap: 0; border: 1px solid var(--border); }
+    .cs-primary { padding: 68px 72px; border-right: 1px solid var(--border); position: relative; }
+    .cs-primary::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+    .cs-secondary { padding: 60px 52px; }
+
+    .cs-label { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; display: block; margin-bottom: 22px; }
+    .cs-label-gold { color: var(--gold); }
+    .cs-label-dim { color: rgba(242,242,238,0.25); }
+
+    .cs-headline { font-size: clamp(1.35rem, 2.1vw, 1.9rem); font-weight: 600; color: var(--bone); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    .cs-subtext { font-size: 0.88rem; line-height: 1.88; color: rgba(242,242,238,0.52); margin-bottom: 6px; max-width: 400px; }
+    .cs-trust { font-size: 0.78rem; font-style: italic; color: rgba(242,242,238,0.3); margin-bottom: 38px; letter-spacing: 0.01em; }
+
+    .cs-section-lbl { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,242,238,0.3); margin-bottom: 10px; }
+    .cs-deliverables { display: flex; flex-direction: column; gap: 9px; margin-bottom: 36px; }
+    .cs-del { font-size: 0.82rem; color: rgba(242,242,238,0.58); display: flex; gap: 12px; align-items: flex-start; line-height: 1.55; }
+    .cs-del::before { content: '—'; color: var(--gold); font-size: 0.65rem; flex-shrink: 0; margin-top: 2px; }
+
+    .cs-steps { display: flex; flex-direction: column; margin-bottom: 32px; }
+    .cs-step { display: flex; gap: 20px; padding: 15px 0; border-top: 1px solid rgba(242,242,238,0.065); }
+    .cs-step:last-child { border-bottom: 1px solid rgba(242,242,238,0.065); }
+    .cs-step-n { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; padding-top: 2px; flex-shrink: 0; width: 20px; }
+    .cs-step-title { font-size: 0.8rem; font-weight: 600; color: var(--bone); margin-bottom: 3px; }
+    .cs-step-desc { font-size: 0.74rem; color: rgba(242,242,238,0.35); line-height: 1.62; }
+
+    .cs-meta { display: flex; gap: 30px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid rgba(242,242,238,0.065); border-bottom: 1px solid rgba(242,242,238,0.065); margin-bottom: 24px; }
+    .cs-meta-k { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .cs-meta-v { font-size: 0.76rem; color: rgba(242,242,238,0.4); }
+
+    .cs-note { font-size: 0.7rem; color: rgba(242,242,238,0.25); line-height: 1.8; margin-bottom: 32px; max-width: 380px; }
+
+    .cs-cta-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: #000; padding: 15px 32px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; border: none; font-family: var(--f); transition: background 0.2s, gap 0.2s; }
+    .cs-cta-btn:hover { background: #d4ba78; gap: 14px; }
+
+    .cs-cta-link { display: inline-flex; align-items: center; gap: 10px; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,242,238,0.38); cursor: pointer; border: none; background: none; font-family: var(--f); transition: color 0.22s, gap 0.2s; padding: 0; }
+    .cs-cta-link:hover { color: var(--bone); gap: 16px; }
+
+    .cs-bullets { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .cs-bullet { font-size: 0.82rem; color: rgba(242,242,238,0.42); display: flex; gap: 12px; align-items: flex-start; line-height: 1.6; }
+    .cs-bullet::before { content: '→'; color: rgba(201,176,55,0.4); font-size: 0.65rem; flex-shrink: 0; margin-top: 2px; }
+
+    .cs-closing { font-size: 0.78rem; color: rgba(242,242,238,0.28); line-height: 1.8; margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid rgba(242,242,238,0.065); }
+    .cs-form-lbl { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,242,238,0.3); margin-bottom: 20px; display: block; }
+
+    /* ── Qualification Modal ── */
+    .qual-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.28s; padding: 20px; }
+    .qual-overlay.open { opacity: 1; pointer-events: all; }
+    .qual-modal { background: #161616; border: 1px solid rgba(242,242,238,0.16); max-width: 620px; width: 100%; max-height: 92vh; overflow-y: auto; position: relative; transform: translateY(20px); transition: transform 0.3s; box-shadow: 0 24px 80px rgba(0,0,0,0.8); }
+    .qual-overlay.open .qual-modal { transform: translateY(0); }
+    .qual-inner { padding: 52px 56px; }
+    .qual-close { position: absolute; top: 18px; right: 20px; background: none; border: none; color: rgba(242,242,238,0.25); font-size: 1.3rem; cursor: pointer; font-family: var(--f); transition: color 0.2s; line-height: 1; padding: 6px 10px; }
+    .qual-close:hover { color: var(--bone); }
+    .qual-head-lbl { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 14px; }
+    .qual-head-title { font-size: clamp(1.25rem, 2vw, 1.7rem); font-weight: 600; color: var(--bone); letter-spacing: -0.025em; line-height: 1.2; margin-bottom: 10px; }
+    .qual-head-sub { font-size: 0.82rem; color: rgba(242,242,238,0.4); line-height: 1.78; margin-bottom: 36px; }
+    .qual-form { display: flex; flex-direction: column; gap: 18px; }
+    .qual-helper { font-size: 0.62rem; color: rgba(242,242,238,0.2); margin-top: 5px; line-height: 1.5; }
+    .qual-ferr { font-size: 0.65rem; color: #e05555; margin-top: 4px; display: none; }
+    .qual-footer { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(242,242,238,0.06); }
+    .qual-footer-note { font-size: 0.68rem; color: rgba(242,242,238,0.2); line-height: 1.7; margin-bottom: 12px; }
+    .qual-not-sales { font-size: 0.72rem; font-style: italic; color: rgba(242,242,238,0.3); margin-bottom: 20px; }
+    .qual-submit { width: 100%; background: var(--gold); color: #000; padding: 16px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; border: none; font-family: var(--f); transition: background 0.2s; }
+    .qual-submit:hover { background: #d4ba78; }
+    .qual-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .qual-step2-hd { margin-bottom: 24px; }
+    .qual-step2-title { font-size: 1.05rem; font-weight: 600; color: var(--bone); margin-bottom: 6px; letter-spacing: -0.02em; }
+    .qual-step2-sub { font-size: 0.8rem; color: rgba(242,242,238,0.38); line-height: 1.7; }
+    .qual-sel-bar { border: 1px solid var(--gborder); background: rgba(201,176,55,0.04); padding: 14px 20px; margin: 20px 0; display: none; gap: 24px; flex-wrap: wrap; align-items: center; }
+    .qual-sel-bar.show { display: flex; }
+    .qual-sel-k { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+    .qual-sel-v { font-size: 0.82rem; color: var(--bone); font-weight: 500; }
+    .qual-confirm { width: 100%; background: var(--gold); color: #000; padding: 16px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; border: none; font-family: var(--f); transition: background 0.2s; margin-top: 20px; display: none; }
+    .qual-confirm:hover { background: #d4ba78; }
+    .qual-confirm.show { display: block; }
+
+    .qual-success { text-align: center; padding: 20px 0 10px; }
+    .qual-success-ring { width: 52px; height: 52px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; color: var(--gold); font-size: 1.1rem; }
+    .qual-success-title { font-size: 1.25rem; font-weight: 600; color: var(--bone); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .qual-success-txt { font-size: 0.84rem; color: rgba(242,242,238,0.42); line-height: 1.85; max-width: 360px; margin: 0 auto; }
+
     .ctab-panel { display: none; }
     .ctab-panel.active { display: block; }
+
+    @media (max-width: 960px) {
+        .contact-split { grid-template-columns: 1fr; }
+        .cs-primary { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 36px; }
+        .cs-secondary { padding: 48px 36px; }
+        .cs-subtext, .cs-note { max-width: 100%; }
+    }
+    @media (max-width: 580px) {
+        .cs-primary { padding: 36px 22px; }
+        .cs-secondary { padding: 36px 22px; }
+        .qual-inner { padding: 36px 24px; }
+        .cs-meta { gap: 18px; }
+    }
 
     /* Booking layout */
     .booking-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: 72px; align-items: start; }
@@ -1542,162 +1627,301 @@
     <div class="wrap">
 
         <!-- Section header -->
-        <div class="r" style="margin-bottom:52px;">
-            <span class="tag" style="display:block;margin-bottom:16px;">Get In Touch</span>
-            <h2 style="max-width:620px;line-height:1.08;">The right conversation<br>starts with the right request.</h2>
-            <p class="sec-micro" style="margin-top:16px;">We don't scale clients. We select them.</p>
+        <div class="r" style="margin-bottom:56px;">
+            <span class="tag" style="display:block;margin-bottom:16px;">Begin Here</span>
+            <h2 style="max-width:700px;line-height:1.06;">Two ways to start<br>a serious conversation.</h2>
+            <p style="font-size:0.9rem;color:var(--dim);line-height:1.85;max-width:500px;margin-top:18px;">
+                We take 2–3 new engagements per quarter. If there is no fit, we say so immediately.
+            </p>
         </div>
 
-        <!-- Tabs -->
-        <div class="contact-tabs r d1">
-            <button class="ctab active" id="ctab-inquiry" onclick="switchContactTab('inquiry')">Send a Message</button>
-            <button class="ctab" id="ctab-book" onclick="switchContactTab('book')">Schedule a Meeting</button>
-        </div>
+        <!-- Split layout -->
+        <div class="contact-split r d1">
 
-        <!-- ── TAB 1: Inquiry Form ── -->
-        <div id="ctab-inquiry-panel" class="ctab-panel active">
-            <div class="contact-grid">
-                <div class="r">
-                    <h3 style="margin-bottom:18px;line-height:1.3;font-size:clamp(1.1rem,1.7vw,1.55rem);">Not ready for a call?<br>Send us a message.</h3>
-                    <p style="font-size:0.88rem;line-height:1.9;margin-bottom:36px;">We review every inquiry. If there's a fit, we'll reach out within 24 hours to arrange a structured evaluation.</p>
-                    <div class="cd-table">
-                        <div class="cd-row">
-                            <div class="cd-k">Response Time</div>
-                            <div class="cd-v">Within 24 hours</div>
+            <!-- ─── LEFT: Strategy Session (60%) ─── -->
+            <div class="cs-primary">
+                <span class="cs-label cs-label-gold">Recommended Path</span>
+
+                <h3 class="cs-headline">Diagnose What's Limiting<br>Your Business</h3>
+
+                <p class="cs-subtext">
+                    A 30-minute working session focused on identifying the constraint holding
+                    your business back — and what to do next.
+                    No pitch. No generic advice.
+                </p>
+                <p class="cs-trust">You speak. We listen. We structure.</p>
+
+                <p class="cs-section-lbl">What you leave with</p>
+                <div class="cs-deliverables">
+                    <div class="cs-del">Clear identification of your primary constraint</div>
+                    <div class="cs-del">Immediate actions to improve performance</div>
+                    <div class="cs-del">A structured next step — if there is a fit</div>
+                </div>
+
+                <div class="cs-steps">
+                    <div class="cs-step">
+                        <div class="cs-step-n">01</div>
+                        <div>
+                            <div class="cs-step-title">Context reviewed in advance</div>
+                            <div class="cs-step-desc">We come prepared. This is not an introduction call.</div>
                         </div>
-                        <div class="cd-row">
-                            <div class="cd-k">Location</div>
-                            <div class="cd-v">Frankfurt am Main, Germany</div>
+                    </div>
+                    <div class="cs-step">
+                        <div class="cs-step-n">02</div>
+                        <div>
+                            <div class="cs-step-title">Direct diagnosis — 30 minutes</div>
+                            <div class="cs-step-desc">We isolate the constraint. Fast, without noise.</div>
                         </div>
-                        <div class="cd-row">
-                            <div class="cd-k">Engagements</div>
-                            <div class="cd-v">By application only</div>
+                    </div>
+                    <div class="cs-step">
+                        <div class="cs-step-n">03</div>
+                        <div>
+                            <div class="cs-step-title">Decision clarity</div>
+                            <div class="cs-step-desc">You leave knowing whether to move forward or not.</div>
                         </div>
                     </div>
                 </div>
-                <div class="r d1">
-                    <div class="form-ok" id="inquiry-ok">
-                        <h3>Message received.</h3>
-                        <p>We'll review your inquiry and respond within 24 hours if there's a fit.</p>
-                    </div>
-                    <form class="form" id="inquiryForm" onsubmit="submitInquiry(event)" novalidate>
-                        <div class="form-row">
-                            <div class="fg">
-                                <label>First Name</label>
-                                <input type="text" name="first" placeholder="First name" required>
-                            </div>
-                            <div class="fg">
-                                <label>Last Name</label>
-                                <input type="text" name="last" placeholder="Last name" required>
-                            </div>
-                        </div>
-                        <div class="fg">
-                            <label>Company Name</label>
-                            <input type="text" name="company" placeholder="Your organisation" required>
-                        </div>
-                        <div class="fg">
-                            <label>Work Email</label>
-                            <input type="email" name="email" placeholder="your@company.com" required>
-                        </div>
-                        <div class="fg">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phone" placeholder="+49 ...">
-                        </div>
-                        <div class="fg">
-                            <label>Message</label>
-                            <textarea name="message" placeholder="Briefly describe what you're working on..." required></textarea>
-                        </div>
-                        <p class="form-note">Business email addresses only. Personal email domains are not accepted.</p>
-                        <button type="submit" class="btn btn-g form-submit" id="inquiry-btn">Send Message &nbsp;→</button>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <!-- ── TAB 2: Schedule a Meeting ── -->
-        <div id="ctab-book-panel" class="ctab-panel">
-            <div class="form-ok" id="booking-ok">
-                <h3>Session requested.</h3>
-                <p>We'll confirm your meeting within 24 hours. Expect an email from our team.</p>
-            </div>
-            <div id="booking-ui">
-                <div class="booking-layout">
-                    <!-- Left: Calendar -->
-                    <div class="booking-cal-col r">
-                        <div style="margin-bottom:24px;">
-                            <h3 style="margin-bottom:10px;line-height:1.3;font-size:clamp(1.1rem,1.7vw,1.55rem);">Select a date.</h3>
-                            <p style="font-size:0.86rem;line-height:1.82;">Available slots are shown in the calendar. Select a date, then choose your preferred time.</p>
-                        </div>
-                        <div class="cal-widget">
-                            <div class="cal-nav">
-                                <button type="button" class="cal-arrow" id="calPrev" onclick="calNav(-1)">&#8592;</button>
-                                <span class="cal-month-label" id="calLabel"></span>
-                                <button type="button" class="cal-arrow" id="calNext" onclick="calNav(1)">&#8594;</button>
-                            </div>
-                            <div class="cal-days-header">
-                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
-                            </div>
-                            <div class="cal-grid" id="calGrid"></div>
-                        </div>
-                        <div class="time-slots" id="timeSlots" style="display:none;">
-                            <div class="time-slots-label" id="timeSlotsLabel">Select a time</div>
-                            <div class="slot-grid" id="slotGrid"></div>
-                        </div>
+                <div class="cs-meta">
+                    <div>
+                        <div class="cs-meta-k">Format</div>
+                        <div class="cs-meta-v">30 min · Video call</div>
                     </div>
-                    <!-- Right: Form -->
-                    <div class="booking-form-col r d1">
-                        <div class="booking-selection" id="bookingSelection" style="display:none;">
-                            <div>
-                                <div class="booking-sel-label">Date</div>
-                                <div class="booking-sel-value" id="bookingSelDate"></div>
-                            </div>
-                            <div class="booking-sel-divider"></div>
-                            <div>
-                                <div class="booking-sel-label">Time (CET)</div>
-                                <div class="booking-sel-value" id="bookingSelTime"></div>
-                            </div>
-                        </div>
-                        <form class="form" id="bookingForm" onsubmit="submitBooking(event)" novalidate>
-                            <div class="form-row">
-                                <div class="fg">
-                                    <label>First Name</label>
-                                    <input type="text" name="bfirst" placeholder="First name" required>
-                                </div>
-                                <div class="fg">
-                                    <label>Last Name</label>
-                                    <input type="text" name="blast" placeholder="Last name" required>
-                                </div>
-                            </div>
-                            <div class="fg">
-                                <label>Company Name</label>
-                                <input type="text" name="bcompany" placeholder="Your organisation" required>
-                            </div>
-                            <div class="fg">
-                                <label>Work Email</label>
-                                <input type="email" name="bemail" placeholder="your@company.com" required>
-                            </div>
-                            <div class="fg">
-                                <label>Phone Number</label>
-                                <input type="tel" name="bphone" placeholder="+49 ...">
-                            </div>
-                            <div class="fg">
-                                <label>Company Website</label>
-                                <input type="url" name="bwebsite" placeholder="https://yourcompany.com">
-                            </div>
-                            <div class="fg">
-                                <label>Primary Operational Challenge</label>
-                                <textarea name="bdesc" placeholder="Briefly describe the main issue you're facing..."></textarea>
-                            </div>
-                            <p class="form-note">Sessions are confirmed within 24 hours. Business email addresses only.</p>
-                            <button type="submit" class="btn btn-g form-submit" id="booking-btn">Request Session &nbsp;→</button>
-                        </form>
+                    <div>
+                        <div class="cs-meta-k">Response</div>
+                        <div class="cs-meta-v">Within 24 hours</div>
+                    </div>
+                    <div>
+                        <div class="cs-meta-k">Availability</div>
+                        <div class="cs-meta-v">Limited · Selected companies only</div>
                     </div>
                 </div>
-            </div>
-        </div>
 
+                <p class="cs-note">
+                    This session is designed for business owners and operators.
+                    No preparation required. We focus on structure and decision-making — not documents.
+                </p>
+
+                <button class="cs-cta-btn" onclick="openQualModal()" type="button">
+                    Apply for a Session &nbsp;→
+                </button>
+            </div>
+
+            <!-- ─── RIGHT: Written Inquiry (40%) ─── -->
+            <div class="cs-secondary">
+                <span class="cs-label cs-label-dim">Alternative</span>
+
+                <h3 class="cs-headline" style="font-size:clamp(1.15rem,1.7vw,1.55rem);">Not ready<br>for a call?</h3>
+
+                <p class="cs-subtext">
+                    If you have a specific question or want to explore a potential fit —
+                    send us context. We respond when relevant.
+                </p>
+
+                <div class="cs-bullets" style="margin-top:24px;">
+                    <div class="cs-bullet">You have a clearly defined question</div>
+                    <div class="cs-bullet">You're evaluating whether ORDYX GROUP is relevant</div>
+                    <div class="cs-bullet">You need internal alignment before a call</div>
+                </div>
+
+                <p class="cs-closing">
+                    Every message is reviewed personally.<br>
+                    If relevant, we respond within 24 hours.
+                </p>
+
+                <!-- Inline inquiry form -->
+                <span class="cs-form-lbl">Send an Inquiry</span>
+
+                <div class="form-ok" id="inquiry-ok" style="padding:32px 28px;margin-bottom:0;">
+                    <h3 style="font-size:1rem;">Message received.</h3>
+                    <p>We'll review your inquiry and respond within 24 hours if there's a fit.</p>
+                </div>
+
+                <form class="form" id="inquiryForm" onsubmit="submitInquiry(event)" novalidate>
+                    <div class="form-row">
+                        <div class="fg">
+                            <label>First Name</label>
+                            <input type="text" name="first" placeholder="First name" required>
+                        </div>
+                        <div class="fg">
+                            <label>Last Name</label>
+                            <input type="text" name="last" placeholder="Last name" required>
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Company Name</label>
+                        <input type="text" name="company" placeholder="Your organisation" required>
+                    </div>
+                    <div class="fg">
+                        <label>Work Email</label>
+                        <input type="email" name="email" placeholder="your@company.com" required>
+                    </div>
+                    <div class="fg">
+                        <label>Your Question or Challenge</label>
+                        <textarea name="message" placeholder="Be direct. 1–2 sentences is enough." required style="min-height:90px;"></textarea>
+                    </div>
+                    <p class="form-note">Business email addresses only.</p>
+                    <button type="submit" class="btn btn-g form-submit" id="inquiry-btn">Send Message &nbsp;→</button>
+                </form>
+            </div>
+
+        </div><!-- /contact-split -->
     </div>
 </section>
+
+
+<!-- ============================================================
+     QUALIFICATION MODAL
+============================================================ -->
+<div id="qualOverlay" class="qual-overlay" onclick="closeQualModalOutside(event)">
+    <div class="qual-modal" role="dialog" aria-modal="true">
+        <button class="qual-close" onclick="closeQualModal()" aria-label="Close">&times;</button>
+
+        <div class="qual-inner">
+
+            <!-- ── STEP 1: Qualification Form ── -->
+            <div id="qual-step1">
+                <span class="qual-head-lbl">Strategy Session</span>
+                <h2 class="qual-head-title">Apply for a<br>Strategy Session</h2>
+                <p class="qual-head-sub">
+                    This is a short qualification step — takes less than 60 seconds.<br>
+                    We use this to understand your business before the call.
+                </p>
+
+                <form class="qual-form" id="qualForm" onsubmit="submitQualStep(event)" novalidate>
+
+                    <div class="fg">
+                        <label>Company Name</label>
+                        <input type="text" name="q_company" placeholder="Your business or brand name" required>
+                        <div class="qual-helper">Your business or brand name</div>
+                        <div class="qual-ferr" id="err-company">Please enter your company name.</div>
+                    </div>
+
+                    <div class="fg">
+                        <label>Your Role</label>
+                        <select name="q_role" required>
+                            <option value="">Select your role</option>
+                            <option value="Owner / Founder">Owner / Founder</option>
+                            <option value="Operator / Manager">Operator / Manager</option>
+                            <option value="Executive">Executive</option>
+                        </select>
+                        <div class="qual-helper">We work directly with decision-makers</div>
+                        <div class="qual-ferr" id="err-role">Please select your role.</div>
+                    </div>
+
+                    <div class="fg">
+                        <label>Approximate Monthly Revenue</label>
+                        <select name="q_revenue" required>
+                            <option value="">Select range</option>
+                            <option value="Under €50k">Under €50k</option>
+                            <option value="€50k – €150k">€50k – €150k</option>
+                            <option value="€150k – €500k">€150k – €500k</option>
+                            <option value="€500k+">€500k+</option>
+                        </select>
+                        <div class="qual-helper">Used only to understand scale and context</div>
+                        <div class="qual-ferr" id="err-revenue">Please select a revenue range.</div>
+                    </div>
+
+                    <div class="fg">
+                        <label>What is currently limiting your business?</label>
+                        <textarea name="q_challenge" placeholder="Briefly describe the main issue — operations, revenue, team, marketing, etc. 1–2 sentences is enough. Be direct." required style="min-height:95px;"></textarea>
+                        <div class="qual-helper">1–2 sentences is enough. Be direct.</div>
+                        <div class="qual-ferr" id="err-challenge">Please describe your main challenge.</div>
+                    </div>
+
+                    <div class="fg">
+                        <label>Work Email</label>
+                        <input type="email" name="q_email" placeholder="name@company.com" required>
+                        <div class="qual-helper">We do not accept personal emails (Gmail, Yahoo, etc.)</div>
+                        <div class="qual-ferr" id="err-email">Please enter your work email.</div>
+                        <div class="qual-ferr" id="err-email-personal">Personal email domains are not accepted. Please use your company email.</div>
+                    </div>
+
+                    <div class="fg">
+                        <label>How urgent is this?</label>
+                        <select name="q_urgency" required>
+                            <option value="">Select urgency</option>
+                            <option value="Immediate">Immediate</option>
+                            <option value="Within 1–3 months">Within 1–3 months</option>
+                            <option value="Exploring">Exploring</option>
+                        </select>
+                        <div class="qual-ferr" id="err-urgency">Please select urgency.</div>
+                    </div>
+
+                    <div class="qual-footer">
+                        <p class="qual-footer-note">
+                            We review every submission personally.<br>
+                            If there is a fit, you will be able to select a time immediately after.
+                        </p>
+                        <p class="qual-not-sales">This is not a sales call. It's a structured working session.</p>
+                        <button type="submit" class="qual-submit" id="qual-continue-btn">Continue &nbsp;→</button>
+                    </div>
+
+                </form>
+            </div><!-- /qual-step1 -->
+
+            <!-- ── STEP 2: Select Date & Time ── -->
+            <div id="qual-step2" style="display:none;">
+                <span class="qual-head-lbl">Strategy Session · Select a Time</span>
+                <div class="qual-step2-hd">
+                    <div class="qual-step2-title">Choose your preferred slot.</div>
+                    <div class="qual-step2-sub">Available Tuesday – Thursday, 14:00 – 16:00 CET. Confirmed within 24 hours.</div>
+                </div>
+
+                <!-- Selected date/time display -->
+                <div class="qual-sel-bar" id="qualSelBar">
+                    <div>
+                        <div class="qual-sel-k">Date</div>
+                        <div class="qual-sel-v" id="qualSelDate">—</div>
+                    </div>
+                    <div style="width:1px;height:28px;background:var(--border);"></div>
+                    <div>
+                        <div class="qual-sel-k">Time (CET)</div>
+                        <div class="qual-sel-v" id="qualSelTime">—</div>
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="cal-widget">
+                    <div class="cal-nav">
+                        <button type="button" class="cal-arrow" id="calPrev" onclick="calNav(-1)">&#8592;</button>
+                        <span class="cal-month-label" id="calLabel"></span>
+                        <button type="button" class="cal-arrow" id="calNext" onclick="calNav(1)">&#8594;</button>
+                    </div>
+                    <div class="cal-days-header">
+                        <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                    </div>
+                    <div class="cal-grid" id="calGrid"></div>
+                </div>
+
+                <div class="time-slots" id="timeSlots" style="display:none;">
+                    <div class="time-slots-label" id="timeSlotsLabel">Select a time</div>
+                    <div class="slot-grid" id="slotGrid"></div>
+                </div>
+
+                <button class="qual-confirm" id="qual-confirm-btn" onclick="submitModalBooking()" type="button">
+                    Confirm Session &nbsp;→
+                </button>
+
+                <p style="font-size:0.65rem;color:rgba(242,242,238,0.2);line-height:1.7;margin-top:16px;">
+                    You will receive a confirmation email within 24 hours.<br>
+                    Session is 30 minutes via video call.
+                </p>
+            </div><!-- /qual-step2 -->
+
+            <!-- ── SUCCESS ── -->
+            <div id="qual-success" style="display:none;" class="qual-success">
+                <div class="qual-success-ring">✓</div>
+                <div class="qual-success-title">Session requested.</div>
+                <p class="qual-success-txt">
+                    Your application has been received. We'll review it and confirm
+                    your session within 24 hours via email.
+                </p>
+            </div>
+
+        </div><!-- /qual-inner -->
+    </div><!-- /qual-modal -->
+</div><!-- /qualOverlay -->
 
 
 <!-- ============================================================
@@ -1810,13 +2034,91 @@
     );
     document.querySelectorAll('.r').forEach(el => io.observe(el));
 
-    /* ── CONTACT TABS ── */
-    function switchContactTab(tab) {
-        document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.ctab-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById('ctab-' + tab).classList.add('active');
-        document.getElementById('ctab-' + tab + '-panel').classList.add('active');
-        if (tab === 'book') calRender();
+    /* ── QUALIFICATION MODAL ── */
+    var qualData = {};
+
+    function openQualModal() {
+        document.getElementById('qualOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeQualModal() {
+        document.getElementById('qualOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    function closeQualModalOutside(e) {
+        if (e.target === document.getElementById('qualOverlay')) closeQualModal();
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeQualModal();
+    });
+
+    function submitQualStep(e) {
+        e.preventDefault();
+        var data = new FormData(document.getElementById('qualForm'));
+        var company   = (data.get('q_company')   || '').trim();
+        var role      = (data.get('q_role')       || '').trim();
+        var revenue   = (data.get('q_revenue')    || '').trim();
+        var challenge = (data.get('q_challenge')  || '').trim();
+        var email     = (data.get('q_email')      || '').trim();
+        var urgency   = (data.get('q_urgency')    || '').trim();
+
+        // Reset errors
+        document.querySelectorAll('.qual-ferr').forEach(function(el) { el.style.display = 'none'; });
+
+        var ok = true;
+        if (!company)               { document.getElementById('err-company').style.display  = 'block'; ok = false; }
+        if (!role)                  { document.getElementById('err-role').style.display     = 'block'; ok = false; }
+        if (!revenue)               { document.getElementById('err-revenue').style.display  = 'block'; ok = false; }
+        if (challenge.length < 8)   { document.getElementById('err-challenge').style.display = 'block'; ok = false; }
+        if (!email) {
+            document.getElementById('err-email').style.display = 'block'; ok = false;
+        } else if (isPersonalEmail(email)) {
+            document.getElementById('err-email-personal').style.display = 'block'; ok = false;
+        }
+        if (!urgency) { document.getElementById('err-urgency').style.display = 'block'; ok = false; }
+        if (!ok) return;
+
+        qualData = { company: company, role: role, revenue: revenue, challenge: challenge, email: email, urgency: urgency };
+
+        document.getElementById('qual-step1').style.display = 'none';
+        document.getElementById('qual-step2').style.display = 'block';
+        selDate = null; selTime = null;
+        document.getElementById('qualSelBar').classList.remove('show');
+        document.getElementById('qual-confirm-btn').classList.remove('show');
+        calRender();
+        document.querySelector('.qual-modal').scrollTop = 0;
+    }
+
+    function submitModalBooking() {
+        if (!selDate || !selTime) { alert('Please select a date and time.'); return; }
+        var btn = document.getElementById('qual-confirm-btn');
+        btn.textContent = 'Confirming…'; btn.disabled = true;
+
+        fetch('/api/book', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                first:   qualData.email.split('@')[0],
+                last:    '',
+                company: qualData.company,
+                email:   qualData.email,
+                phone:   '',
+                website: '',
+                desc:    qualData.challenge + '\n\nRole: ' + qualData.role + '\nRevenue: ' + qualData.revenue + '\nUrgency: ' + qualData.urgency,
+                date:    selDate,
+                time:    selTime,
+            }),
+        })
+        .then(function(r) { return r.json(); })
+        .then(function() {
+            document.getElementById('qual-step2').style.display = 'none';
+            document.getElementById('qual-success').style.display = 'block';
+            document.querySelector('.qual-modal').scrollTop = 0;
+        })
+        .catch(function() {
+            btn.textContent = 'Confirm Session →'; btn.disabled = false;
+            alert('Something went wrong. Please try again.');
+        });
     }
 
     /* ── CALENDAR ── */
@@ -1912,7 +2214,7 @@
             slotGrid.appendChild(btn);
         });
         slotsEl.style.display = 'block';
-        updateBookingSel();
+        updateQualSel();
     }
 
     function selectTime(time) {
@@ -1920,21 +2222,25 @@
         document.querySelectorAll('.slot').forEach(function(s) {
             s.classList.toggle('selected', s.textContent === time);
         });
-        updateBookingSel();
+        updateQualSel();
+        // Show confirm button
+        var btn = document.getElementById('qual-confirm-btn');
+        if (btn) btn.classList.add('show');
     }
 
-    function updateBookingSel() {
-        const selEl   = document.getElementById('bookingSelection');
-        const dateEl  = document.getElementById('bookingSelDate');
-        const timeEl  = document.getElementById('bookingSelTime');
+    function updateQualSel() {
+        var dateEl = document.getElementById('qualSelDate');
+        var timeEl = document.getElementById('qualSelTime');
+        var bar    = document.getElementById('qualSelBar');
+        if (!dateEl) return;
         if (selDate) {
-            const parts  = selDate.split('-').map(Number);
-            const dObj   = new Date(parts[0], parts[1] - 1, parts[2]);
-            const opts   = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+            var parts = selDate.split('-').map(Number);
+            var dObj  = new Date(parts[0], parts[1] - 1, parts[2]);
+            var opts  = { weekday: 'long', month: 'long', day: 'numeric' };
             dateEl.textContent = dObj.toLocaleDateString('en-GB', opts);
+            bar.classList.add('show');
         }
-        timeEl.textContent = selTime ? selTime + ' CET' : '—';
-        selEl.style.display = selDate ? 'flex' : 'none';
+        if (timeEl) timeEl.textContent = selTime ? selTime + ' CET' : '—';
     }
 
     /* ── BLOCKED EMAIL DOMAINS ── */
@@ -1942,47 +2248,6 @@
     function isPersonalEmail(email) {
         var dom = (email.split('@')[1] || '').toLowerCase();
         return BLOCKED.some(function(b) { return dom === b+'.com' || dom === b+'.de' || dom.startsWith(b+'.'); });
-    }
-
-    /* ── HIDDEN IFRAME JOTFORM SUBMIT (bypasses CORS) ── */
-    function jfSubmit(formId, fields) {
-        return new Promise(function(resolve) {
-            var fname  = 'jf_' + Date.now();
-            var iframe = document.createElement('iframe');
-            iframe.name = fname;
-            iframe.setAttribute('style','position:fixed;width:1px;height:1px;top:-999px;left:-999px;border:none;opacity:0;');
-            document.body.appendChild(iframe);
-
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://submit.jotform.com/submit/' + formId + '/';
-            form.target = fname;
-            form.setAttribute('style','display:none;');
-
-            Object.keys(fields).forEach(function(k) {
-                var el = document.createElement('input');
-                el.type  = 'hidden';
-                el.name  = k;
-                el.value = fields[k] || '';
-                form.appendChild(el);
-            });
-
-            document.body.appendChild(form);
-
-            var settled = false;
-            function finish() {
-                if (settled) return;
-                settled = true;
-                setTimeout(function() {
-                    try { document.body.removeChild(form);   } catch(e) {}
-                    try { document.body.removeChild(iframe); } catch(e) {}
-                }, 2500);
-                resolve();
-            }
-            iframe.addEventListener('load', finish);
-            setTimeout(finish, 5000);
-            form.submit();
-        });
     }
 
     /* ── SUBMIT INQUIRY FORM ── */
@@ -2005,19 +2270,27 @@
         btn.textContent = 'Sending…';
         btn.disabled = true;
 
-        jfSubmit('260893671355062', {
-            'formID':                 '260893671355062',
-            'q2_q2_fullname0[first]': data.get('first')   || '',
-            'q2_q2_fullname0[last]':  data.get('last')    || '',
-            'q3_q3_textbox1':         data.get('company') || '',
-            'q4_q4_email2':           email,
-            'q5_q5_phone3[full]':     data.get('phone')   || '',
-            'q6_q6_textarea4':        data.get('message') || '',
-            'simple_spc':             '260893671355062-260893671355062',
-            'submitSource':           'embed'
-        }).then(function() {
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                first:   data.get('first')   || '',
+                last:    data.get('last')    || '',
+                company: data.get('company') || '',
+                email:   email,
+                phone:   data.get('phone')   || '',
+                message: data.get('message') || '',
+            }),
+        })
+        .then(function(res) { return res.json(); })
+        .then(function() {
             form.style.display = 'none';
             document.getElementById('inquiry-ok').classList.add('show');
+        })
+        .catch(function() {
+            btn.textContent = 'Send Message →';
+            btn.disabled = false;
+            alert('Something went wrong. Please try again or contact us directly.');
         });
     }
 
@@ -2047,27 +2320,30 @@
         btn.textContent = 'Submitting…';
         btn.disabled = true;
 
-        var pts   = selDate.split('-').map(Number);
-        var jfDt  = String(pts[1]).padStart(2,'0') + '/' + String(pts[2]).padStart(2,'0') + '/' + pts[0] + ' ' + selTime;
-
-        jfSubmit('260893075278064', {
-            'formID':                              '260893075278064',
-            'q2_q2_fullname0[first]':              fData.get('bfirst')   || '',
-            'q2_q2_fullname0[last]':               fData.get('blast')    || '',
-            'q3_q3_textbox1':                      fData.get('bcompany') || '',
-            'q4_q4_email2':                        email,
-            'q5_q5_phone3[full]':                  fData.get('bphone')   || '',
-            'q6_q6_textbox4':                      fData.get('bwebsite') || '',
-            'q7_q7_textarea5':                     fData.get('bdesc')    || '',
-            'q8_q8_appointment6[date]':            jfDt,
-            'q8_q8_appointment6[implementation]':  'new',
-            'q8_q8_appointment6[duration]':        '30',
-            'q8_q8_appointment6[timezone]':        'Europe/Berlin (GMT+02:00)',
-            'simple_spc':                          '260893075278064-260893075278064',
-            'submitSource':                        'embed'
-        }).then(function() {
+        fetch('/api/book', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                first:   fData.get('bfirst')   || '',
+                last:    fData.get('blast')    || '',
+                company: fData.get('bcompany') || '',
+                email:   email,
+                phone:   fData.get('bphone')   || '',
+                website: fData.get('bwebsite') || '',
+                desc:    fData.get('bdesc')    || '',
+                date:    selDate,
+                time:    selTime,
+            }),
+        })
+        .then(function(res) { return res.json(); })
+        .then(function() {
             document.getElementById('booking-ui').style.display = 'none';
             document.getElementById('booking-ok').classList.add('show');
+        })
+        .catch(function() {
+            btn.textContent = 'Request Session →';
+            btn.disabled = false;
+            alert('Something went wrong. Please try again.');
         });
     }
 
