@@ -125,7 +125,7 @@ module.exports = async function handler(req, res) {
 
   <!-- Header -->
   <tr><td style="padding:40px 0 28px">
-    <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#c9a96e;text-transform:uppercase;line-height:1">ORDYX GROUP</div>
+    <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#ffffff;text-transform:uppercase;line-height:1">ORDYX GROUP</div>
   </td></tr>
   <!-- Gold rule -->
   <tr><td style="padding-bottom:48px">
