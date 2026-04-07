@@ -9,11 +9,16 @@ function verifyToken(id, token) {
 }
 
 async function sendEmail({ to, subject, html }) {
-  const from = process.env.FROM_EMAIL || 'ORDYX GROUP <onboarding@resend.dev>';
+  const configuredFrom = process.env.FROM_EMAIL || '';
+  const from = configuredFrom.includes('ordyxgroup.com')
+    ? 'ORDYX GROUP <onboarding@resend.dev>'
+    : (configuredFrom || 'ORDYX GROUP <onboarding@resend.dev>');
+  const replyTo = process.env.STEFAN_EMAIL || 'stefan@ordyxgroup.com';
+
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to, subject, html }),
+    body: JSON.stringify({ from, to, subject, html, reply_to: replyTo }),
   });
   if (!r.ok) throw new Error(await r.text());
   return r.json();

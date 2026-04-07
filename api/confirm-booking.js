@@ -66,8 +66,13 @@ function buildICS({ name, email, date, time }) {
 }
 
 async function sendEmail({ to, subject, html, attachments }) {
-  const from = process.env.FROM_EMAIL || 'ORDYX GROUP <onboarding@resend.dev>';
-  const body = { from, to, subject, html };
+  const configuredFrom = process.env.FROM_EMAIL || '';
+  const from = configuredFrom.includes('ordyxgroup.com')
+    ? 'ORDYX GROUP <onboarding@resend.dev>'
+    : (configuredFrom || 'ORDYX GROUP <onboarding@resend.dev>');
+  const replyTo = process.env.STEFAN_EMAIL || 'stefan@ordyxgroup.com';
+
+  const body = { from, to, subject, html, reply_to: replyTo };
   if (attachments) body.attachments = attachments;
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
