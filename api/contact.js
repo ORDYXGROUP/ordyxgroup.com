@@ -1,12 +1,6 @@
 // Vercel Serverless Function — ORDYX GROUP Contact Form
 // Saves to Supabase AND forwards to JotForm server-side.
 // JotForm sends Stefan a notification email — client receives NOTHING from JotForm.
-// (Disable the JotForm Autoresponder in Settings → Emails to stop client-facing emails)
-//
-// Required Vercel env vars:
-//   SUPABASE_URL, SUPABASE_SERVICE_KEY, ORDYX_COMPANY_ID (optional)
-
-export const config = { runtime: 'nodejs20.x' };
 
 const BLOCKED = ['gmail','yahoo','hotmail','outlook','icloud','aol','live','me',
                  'googlemail','protonmail','gmx','web','yandex','mail','inbox'];
@@ -16,7 +10,7 @@ function isPersonalEmail(email) {
   return BLOCKED.some(b => dom === b+'.com' || dom === b+'.de' || dom.startsWith(b+'.'));
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -34,9 +28,7 @@ export default async function handler(req, res) {
       return res.status(422).json({ error: 'Personal email not accepted' });
     }
 
-    // ── 1. Forward to JotForm (server-side) so Stefan gets his notification email ──
-    // The client never touches JotForm directly — no autoresponder reaches them.
-    // To fully stop client emails: JotForm → Settings → Emails → delete Autoresponder.
+    // ── 1. Forward to JotForm server-side ──
     try {
       const jfForm = new URLSearchParams();
       jfForm.append('formID', '260893671355062');
@@ -72,19 +64,17 @@ export default async function handler(req, res) {
           'Prefer': 'return=minimal',
         },
         body: JSON.stringify({
-          name:        `${first} ${last}`.trim(),
+          name:         `${first} ${last}`.trim(),
           company_name: company,
           email,
-          phone:       phone || null,
-          notes:       message,
-          source:      'website_inquiry',
-          status:      'new',
-          company_id:  process.env.ORDYX_COMPANY_ID || null,
+          phone:        phone || null,
+          notes:        message,
+          source:       'website_inquiry',
+          status:       'new',
+          company_id:   process.env.ORDYX_COMPANY_ID || null,
         }),
       });
       if (!r.ok) console.error('Supabase error:', await r.text());
-    } else {
-      console.log('[contact] Supabase not configured — logged only:', { first, last, company, email });
     }
 
     return res.status(200).json({ ok: true });
@@ -92,4 +82,4 @@ export default async function handler(req, res) {
     console.error('Contact handler error:', err);
     return res.status(500).json({ error: 'Internal server error' });
   }
-}
+};

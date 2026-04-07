@@ -1,15 +1,7 @@
 // Vercel Serverless Function — ORDYX GROUP Confirm Booking
-// Stefan clicks "Confirm Session" in his approval email → this runs.
-// 1. Validates HMAC token
-// 2. Updates Supabase lead status → 'confirmed'
-// 3. Sends client a confirmation email with .ics calendar attachment
-// 4. Returns a branded success page to Stefan
+// Stefan clicks "Confirm Session" → validates token → sends client ICS invite
 
-import { createHmac } from 'crypto';
-
-export const config = { runtime: 'nodejs20.x' };
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
+const { createHmac } = require('crypto');
 
 function verifyToken(id, token) {
   const secret = process.env.BOOKING_SECRET || 'ordyx-booking-secret-change-me';
@@ -25,34 +17,24 @@ function formatDateDisplay(dateStr) {
   });
 }
 
-// Generates an .ics file content for the calendar invite
-function buildICS({ name, email, company, date, time }) {
-  // Parse date + time → UTC (CET = UTC+1 or UTC+2 DST)
+function buildICS({ name, email, date, time }) {
   const [year, month, day] = date.split('-').map(Number);
   const [hour, minute]     = time.split(':').map(Number);
 
-  // Determine CET offset: last Sun March → last Sun October = CEST (+2), else CET (+1)
+  // CET/CEST offset
   const d     = new Date(year, month - 1, day);
-  const march = new Date(year, 2, 31); // find last Sunday of March
+  const march = new Date(year, 2, 31);
   while (march.getDay() !== 0) march.setDate(march.getDate() - 1);
   const oct   = new Date(year, 9, 31);
   while (oct.getDay() !== 0) oct.setDate(oct.getDate() - 1);
-  const isSummer = d >= march && d < oct;
-  const offsetH  = isSummer ? 2 : 1;
+  const offsetH  = (d >= march && d < oct) ? 2 : 1;
 
-  // Start time in UTC
   const startUtc = new Date(Date.UTC(year, month - 1, day, hour - offsetH, minute));
-  const endUtc   = new Date(startUtc.getTime() + 30 * 60 * 1000); // +30 min
+  const endUtc   = new Date(startUtc.getTime() + 30 * 60 * 1000);
 
-  function toICSDate(dt) {
-    return dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-  }
+  function fmt(dt) { return dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'; }
 
-  const dtStart  = toICSDate(startUtc);
-  const dtEnd    = toICSDate(endUtc);
-  const dtstamp  = toICSDate(new Date());
   const uid      = `booking-${date}-${time.replace(':', '')}-${email.split('@')[0]}@ordyxgroup.com`;
-  const fromName = 'Stefan Maksimovic · ORDYX GROUP';
   const fromMail = process.env.STEFAN_EMAIL || 'stefan@ordyxgroup.com';
 
   return [
@@ -63,12 +45,12 @@ function buildICS({ name, email, company, date, time }) {
     'METHOD:REQUEST',
     'BEGIN:VEVENT',
     `UID:${uid}`,
-    `DTSTAMP:${dtstamp}`,
-    `DTSTART:${dtStart}`,
-    `DTEND:${dtEnd}`,
-    `SUMMARY:Strategy Session – ORDYX GROUP`,
-    `DESCRIPTION:30-minute working session with ${fromName}.\\nThis is not a sales call — it is a structured diagnostic session.`,
-    `ORGANIZER;CN=${fromName}:mailto:${fromMail}`,
+    `DTSTAMP:${fmt(new Date())}`,
+    `DTSTART:${fmt(startUtc)}`,
+    `DTEND:${fmt(endUtc)}`,
+    'SUMMARY:Strategy Session – ORDYX GROUP',
+    `DESCRIPTION:30-minute working session.\\nThis is not a sales call — it is a structured diagnostic session.`,
+    `ORGANIZER;CN=Stefan Maksimovic · ORDYX GROUP:mailto:${fromMail}`,
     `ATTENDEE;CN=${name};RSVP=TRUE;PARTSTAT=ACCEPTED:mailto:${email}`,
     'LOCATION:Video Call (link will be shared)',
     'STATUS:CONFIRMED',
@@ -89,24 +71,18 @@ async function sendEmail({ to, subject, html, attachments }) {
   if (attachments) body.attachments = attachments;
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-      'Content-Type':  'application/json',
-    },
+    headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
   if (!r.ok) throw new Error(await r.text());
   return r.json();
 }
 
-// ── Handler ──────────────────────────────────────────────────────────────────
-
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).end();
 
   const { id, token, date, time, name, company, email } = req.query;
 
-  // 1. Validate token
   if (!id || !token || !verifyToken(id, token)) {
     return res.status(403).send(page('Invalid or expired link.', false));
   }
@@ -117,27 +93,21 @@ export default async function handler(req, res) {
   const dateDisplay = formatDateDisplay(date);
 
   try {
-    // 2. Update Supabase status → confirmed
+    // Update Supabase → confirmed
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-    if (supabaseUrl && supabaseKey) {
-      // id is the lead UUID when returned by Supabase
-      const isUuid = /^[0-9a-f-]{36}$/i.test(id);
-      if (isUuid) {
-        await fetch(`${supabaseUrl}/rest/v1/leads?id=eq.${id}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey':        supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`,
-            'Content-Type':  'application/json',
-            'Prefer':        'return=minimal',
-          },
-          body: JSON.stringify({ status: 'confirmed' }),
-        });
-      }
+    if (supabaseUrl && supabaseKey && /^[0-9a-f-]{36}$/i.test(id)) {
+      await fetch(`${supabaseUrl}/rest/v1/leads?id=eq.${id}`, {
+        method: 'PATCH',
+        headers: {
+          'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json', 'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({ status: 'confirmed' }),
+      });
     }
 
-    // 3. Build .ics + send confirmation email to client
+    // Send confirmation + ICS to client
     if (process.env.RESEND_API_KEY) {
       const icsContent = buildICS({ name, email, company, date, time });
       const icsBase64  = Buffer.from(icsContent).toString('base64');
@@ -165,36 +135,25 @@ export default async function handler(req, res) {
   <div class="logo">ORDYX GROUP</div>
   <div class="badge">✓ Confirmed</div>
   <h1>Your session is confirmed.</h1>
-  <p>We look forward to speaking with you, ${(name || '').split(' ')[0]}. A calendar invite is attached to this email — add it to your calendar with one click.</p>
-
+  <p>We look forward to speaking with you, ${(name || '').split(' ')[0]}. A calendar invite is attached — add it with one click.</p>
   <div class="slot">
     <div class="slot-date">${dateDisplay}</div>
     <div class="slot-time">${time} CET &nbsp;·&nbsp; 30 minutes</div>
   </div>
-
   <div class="info">
     <div class="info-row"><strong>Format</strong> &nbsp;— Video call (link shared 1 hour before)</div>
     <div class="info-row"><strong>Duration</strong> &nbsp;— 30 minutes</div>
     <div class="info-row"><strong>Preparation</strong> &nbsp;— No preparation required. Come as you are.</div>
   </div>
-
   <p style="font-style:italic;color:#6a6a6a">This is not a sales call. It's a structured working session focused on diagnosing what's limiting your business.</p>
-
-  <div class="foot">
-    Questions? Simply reply to this email.<br>
-    ORDYX GROUP &nbsp;·&nbsp; Frankfurt<br>
-    Stefan Maksimovic
-  </div>
-</div>
-</body></html>`,
-        attachments: [
-          {
-            filename:    'ordyx-session.ics',
-            content:     icsBase64,
-            type:        'text/calendar',
-            disposition: 'attachment',
-          },
-        ],
+  <div class="foot">Questions? Simply reply to this email.<br>ORDYX GROUP &nbsp;·&nbsp; Frankfurt<br>Stefan Maksimovic</div>
+</div></body></html>`,
+        attachments: [{
+          filename:    'ordyx-session.ics',
+          content:     icsBase64,
+          type:        'text/calendar',
+          disposition: 'attachment',
+        }],
       });
     }
 
@@ -203,14 +162,11 @@ export default async function handler(req, res) {
       true,
       `${dateDisplay} · ${time} CET`
     ));
-
   } catch (err) {
     console.error('[confirm-booking] error:', err);
     return res.status(500).send(page('Something went wrong. Please try again.', false));
   }
-}
-
-// ── Response page rendered in Stefan's browser ────────────────────────────────
+};
 
 function page(message, success, detail = '') {
   const color = success ? '#2d6a4f' : '#9b2c2c';
@@ -232,6 +188,5 @@ function page(message, success, detail = '') {
   <p>${message}</p>
   ${detail ? `<div class="detail">${detail}</div>` : ''}
   <div class="logo">ORDYX GROUP</div>
-</div>
-</body></html>`;
+</div></body></html>`;
 }
