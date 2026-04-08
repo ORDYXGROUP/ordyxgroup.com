@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ORDYX Group — An operating discipline firm. Built for businesses that are serious about structure, value, and scale. Headquartered in Frankfurt am Main, Germany.">
+    <meta name="keywords" content="ORDYX Group, operating discipline, operational excellence, Frankfurt, business structure, execution management">
+    <title>About — ORDYX Group</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    /* ============================================================
+       ROOT
+    ============================================================ */
+    :root {
+        --black:   #000000;
+        --dark:    #080808;
+        --bone:    #F2F2EE;
+        --gold:    #C9B037;
+        --muted:   rgba(242,242,238,0.90);
+        --dim:     rgba(242,242,238,0.62);
+        --border:  rgba(242,242,238,0.11);
+        --gborder: rgba(201,176,55,0.32);
+
+        --f: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+        --maxw: 1300px;
+        --ph:   48px;
+        --sv:   120px;
+    }
+
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        background: var(--black);
+        color: var(--bone);
+        font-family: var(--f);
+        font-weight: 300;
+        line-height: 1.72;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+    ul  { list-style: none; }
+    button { font-family: var(--f); background: none; border: none; cursor: pointer; color: inherit; }
+
+    /* ============================================================
+       TYPE SCALE
+    ============================================================ */
+    h1 { font-size: clamp(2.4rem, 5.5vw, 5.8rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.025em; }
+    h2 { font-size: clamp(2.1rem, 4vw,   4.2rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
+    h3 { font-size: clamp(1.3rem, 2.1vw, 2.1rem); font-weight: 600; line-height: 1.14; letter-spacing: -0.01em; }
+    h4 { font-size: clamp(1rem,   1.3vw, 1.18rem); font-weight: 600; line-height: 1.3; }
+    p  { font-size: clamp(0.92rem, 1.12vw, 1.02rem); line-height: 1.86; color: var(--muted); }
+
+    .tag {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--ph); }
+    .sec  { padding: var(--sv) 0; }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .r { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .r.on { opacity: 1; transform: translateY(0); }
+    .r.d1 { transition-delay: 0.07s; }
+    .r.d2 { transition-delay: 0.14s; }
+    .r.d3 { transition-delay: 0.21s; }
+    .r.d4 { transition-delay: 0.28s; }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 14px 36px;
+        font-family: var(--f); font-size: 0.72rem; font-weight: 600;
+        letter-spacing: 0.16em; text-transform: uppercase;
+        border: 1px solid; cursor: pointer;
+        transition: background 0.24s, color 0.24s, border-color 0.24s;
+    }
+    .btn-g { background: var(--gold); border-color: var(--gold); color: #000; }
+    .btn-g:hover { background: transparent; color: var(--gold); }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    #nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 26px var(--ph);
+        transition: padding 0.3s, background 0.3s, border-color 0.3s;
+        border-bottom: 1px solid transparent;
+    }
+    #nav.stuck {
+        padding: 16px var(--ph);
+        background: rgba(0,0,0,0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom-color: var(--border);
+    }
+
+    .logo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #fff;
+        white-space: nowrap;
+    }
+
+    .nav-links { display: flex; gap: 34px; }
+    .nav-links a {
+        font-size: 0.78rem; font-weight: 600;
+        letter-spacing: 0.12em; text-transform: uppercase;
+        color: rgba(242,242,238,0.92);
+        position: relative; transition: color 0.22s;
+    }
+    .nav-links a::after {
+        content: ''; position: absolute; bottom: -3px; left: 0;
+        width: 0; height: 1px; background: var(--gold); transition: width 0.24s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.nav-active { color: var(--gold); }
+    .nav-links a.nav-active::after { width: 100%; }
+
+    .nav-cta {
+        font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--gold); border: 1px solid var(--gborder); padding: 10px 20px;
+        transition: background 0.22s, color 0.22s;
+    }
+    .nav-cta:hover { background: var(--gold); color: #000; }
+
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
+    .burger span { display: block; width: 22px; height: 1px; background: #fff; transition: 0.28s; }
+    .burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mob-nav {
+        display: none; position: fixed; inset: 0; z-index: 1000;
+        background: #000; flex-direction: column;
+        align-items: center; justify-content: center; gap: 32px;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-nav a {
+        font-size: 1.8rem; font-weight: 700; letter-spacing: 0.04em;
+        color: var(--bone); transition: color 0.2s;
+    }
+    .mob-nav a:hover { color: var(--gold); }
+    .mob-nav a.nav-active { color: var(--gold); }
+
+    @media (max-width: 860px) {
+        :root { --ph: 24px; --sv: 80px; }
+        .nav-links, .nav-cta { display: none; }
+        .burger { display: flex; }
+    }
+
+    /* ============================================================
+       SECTION 1 — PAGE IDENTITY
+    ============================================================ */
+    #page-identity {
+        background: var(--dark);
+        padding-top: 200px;
+        padding-bottom: var(--sv);
+    }
+    .identity-tag { display: block; margin-bottom: 28px; }
+    .identity-h1 {
+        font-size: clamp(3.2rem, 7vw, 8rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.0;
+        color: var(--bone);
+        margin-bottom: 32px;
+    }
+    .identity-sub {
+        font-size: clamp(1.05rem, 1.7vw, 1.32rem);
+        font-weight: 400;
+        color: var(--dim);
+        line-height: 1.56;
+        max-width: 680px;
+    }
+
+    /* ============================================================
+       SECTION 2 — WHY ORDYX EXISTS (white bg)
+    ============================================================ */
+    #origin {
+        background: #fff;
+    }
+    .origin-tag { display: block; margin-bottom: 28px; color: var(--gold); }
+    .origin-h2 {
+        color: #111;
+        max-width: 820px;
+        margin-bottom: 52px;
+    }
+    .origin-paras {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 720px;
+    }
+    .origin-paras p {
+        font-size: clamp(0.93rem, 1.1vw, 1.02rem);
+        color: #3a3a3a;
+        line-height: 1.92;
+    }
+
+    /* ============================================================
+       SECTION 3 — PRINCIPLES (dark bg)
+    ============================================================ */
+    #principles {
+        background: #0a0a0a;
+    }
+    .principles-tag { display: block; margin-bottom: 28px; }
+    .principles-h2 {
+        color: var(--bone);
+        margin-bottom: 64px;
+        max-width: 600px;
+    }
+    .principles-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    .principle-item {
+        border-top: 1px solid var(--border);
+        padding: 40px 0;
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 0 48px;
+        align-items: start;
+    }
+    .principle-item:last-child {
+        border-bottom: 1px solid var(--border);
+    }
+    .principle-num {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+        padding-top: 4px;
+        white-space: nowrap;
+    }
+    .principle-body {}
+    .principle-title {
+        font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+        font-weight: 700;
+        color: var(--bone);
+        letter-spacing: -0.015em;
+        margin-bottom: 10px;
+        line-height: 1.22;
+    }
+    .principle-desc {
+        font-size: clamp(0.88rem, 1.05vw, 0.97rem);
+        color: var(--dim);
+        line-height: 1.84;
+    }
+
+    @media (max-width: 640px) {
+        .principle-item {
+            grid-template-columns: 1fr;
+            gap: 12px 0;
+        }
+    }
+
+    /* ============================================================
+       SECTION 4 — HOW ORDYX WORKS (bone bg)
+    ============================================================ */
+    #approach {
+        background: var(--bone);
+    }
+    .approach-tag { display: block; margin-bottom: 28px; color: var(--gold); }
+    .approach-h2 {
+        color: #111;
+        max-width: 820px;
+        margin-bottom: 52px;
+    }
+    .approach-paras {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 720px;
+    }
+    .approach-paras p {
+        font-size: clamp(0.93rem, 1.1vw, 1.02rem);
+        color: #3a3a3a;
+        line-height: 1.92;
+    }
+    .approach-phases {
+        margin-top: 52px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+    }
+    .approach-phase {
+        background: #fff;
+        padding: 36px 32px;
+        border-top: 2px solid var(--gold);
+    }
+    .phase-num {
+        font-size: 0.56rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 14px;
+    }
+    .phase-name {
+        font-size: clamp(1rem, 1.4vw, 1.14rem);
+        font-weight: 700;
+        color: #111;
+        letter-spacing: -0.01em;
+        margin-bottom: 10px;
+    }
+    .phase-desc {
+        font-size: 0.88rem;
+        color: #4a4a4a;
+        line-height: 1.75;
+    }
+    @media (max-width: 700px) {
+        .approach-phases { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 5 — FRANKFURT (dark bg)
+    ============================================================ */
+    #frankfurt {
+        background: var(--dark);
+    }
+    .frankfurt-tag { display: block; margin-bottom: 28px; }
+    .frankfurt-h2 {
+        color: var(--bone);
+        margin-bottom: 52px;
+    }
+    .frankfurt-paras {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 720px;
+    }
+    .frankfurt-paras p {
+        font-size: clamp(0.93rem, 1.1vw, 1.02rem);
+        color: var(--muted);
+        line-height: 1.92;
+    }
+
+    /* ============================================================
+       SECTION 6 — WHY LIMITED (bone bg)
+    ============================================================ */
+    #selectivity {
+        background: var(--bone);
+    }
+    .selectivity-tag { display: block; margin-bottom: 28px; color: var(--gold); }
+    .selectivity-h2 {
+        color: #111;
+        max-width: 820px;
+        margin-bottom: 52px;
+    }
+    .selectivity-body {
+        max-width: 720px;
+    }
+    .selectivity-body p {
+        font-size: clamp(0.93rem, 1.1vw, 1.02rem);
+        color: #3a3a3a;
+        line-height: 1.92;
+        margin-bottom: 20px;
+    }
+    .selectivity-signals {
+        margin: 36px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border-left: 2px solid var(--gold);
+        padding-left: 28px;
+    }
+    .selectivity-signal {
+        font-size: clamp(0.88rem, 1.05vw, 0.97rem);
+        color: #222;
+        line-height: 1.72;
+        font-weight: 400;
+    }
+    .selectivity-closing {
+        font-size: clamp(0.88rem, 1.05vw, 0.97rem);
+        color: #6a6a6a;
+        line-height: 1.80;
+        font-style: italic;
+        margin-top: 8px;
+    }
+
+    /* ============================================================
+       SECTION 7 — CTA (black bg)
+    ============================================================ */
+    #cta-section {
+        background: var(--black);
+    }
+    .cta-inner {
+        text-align: center;
+        max-width: 820px;
+        margin: 0 auto;
+    }
+    .cta-h2 {
+        color: var(--bone);
+        margin-bottom: 24px;
+        line-height: 1.16;
+    }
+    .cta-sub {
+        font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+        color: var(--dim);
+        line-height: 1.72;
+        margin-bottom: 44px;
+        font-weight: 400;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer { background: #000; border-top: 1px solid var(--border); padding: 44px 0; }
+    .foot-brand { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.12em; color: #fff; }
+    .foot-sub { font-size: 0.64rem; font-weight: 500; letter-spacing: 0.1em; color: var(--muted); margin-top: 4px; }
+    .foot-copy { font-size: 0.65rem; color: rgba(242,242,238,0.88); letter-spacing: 0.08em; }
+    .foot-social { display: flex; gap: 14px; align-items: center; }
+    .foot-social a {
+        display: flex; align-items: center; justify-content: center;
+        width: 34px; height: 34px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        transition: border-color 0.22s, color 0.22s;
+    }
+    .foot-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .foot-social svg { width: 15px; height: 15px; }
+
+    @media (max-width: 900px) {
+        .foot-top-grid { grid-template-columns: 1fr 1fr !important; row-gap: 40px !important; }
+    }
+    @media (max-width: 560px) {
+        .foot-top-grid { grid-template-columns: 1fr !important; }
+        .foot-bottom { flex-direction: column; align-items: flex-start !important; gap: 10px; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav id="nav">
+    <a href="/" class="logo">ORDYX GROUP</a>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/problems.html">Problems</a></li>
+        <li><a href="/solutions.html">Solutions</a></li>
+        <li><a href="/about.html" class="nav-active">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a href="/#contact" class="nav-cta">Apply for a Session</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+<nav class="mob-nav" id="mobNav">
+    <a href="/" onclick="closeNav()">Home</a>
+    <a href="/problems.html" onclick="closeNav()">Problems</a>
+    <a href="/solutions.html" onclick="closeNav()">Solutions</a>
+    <a href="/about.html" class="nav-active" onclick="closeNav()">About</a>
+    <a href="/#contact" onclick="closeNav()">Contact</a>
+</nav>
+
+
+<!-- ============================================================
+     SECTION 1 — PAGE IDENTITY
+============================================================ -->
+<section id="page-identity">
+    <div class="wrap">
+        <span class="tag identity-tag r">The Firm</span>
+        <h1 class="identity-h1 r d1">ORDYX Group.</h1>
+        <p class="identity-sub r d2">An operating discipline firm. Built for businesses that are serious about structure, value, and scale.</p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2 — WHY ORDYX EXISTS
+============================================================ -->
+<section id="origin" class="sec">
+    <div class="wrap">
+        <span class="tag origin-tag r">The Origin</span>
+        <h2 class="origin-h2 r d1">Most businesses do not fail from lack of effort. They fail from lack of structure.</h2>
+        <div class="origin-paras">
+            <p class="r d2">The owner works harder than anyone in the building. The team is present. The intention is real. But the structure is not there.</p>
+            <p class="r d3">Standards exist in conversation, not in operating procedure. Accountability exists in expectation, not in enforcement. Performance is hoped for, not designed.</p>
+            <p class="r d4">That gap — between effort and structure — is what ORDYX was built to close. Not through advice. Not through training programs. Through installed operating discipline that holds when the founder is not in the room.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3 — WHAT ORDYX BELIEVES
+============================================================ -->
+<section id="principles" class="sec">
+    <div class="wrap">
+        <span class="tag principles-tag r">The Principles</span>
+        <h2 class="principles-h2 r d1">What we know to be true.</h2>
+
+        <div class="principles-list">
+
+            <div class="principle-item r">
+                <div class="principle-num">01</div>
+                <div class="principle-body">
+                    <div class="principle-title">Discipline beats inspiration.</div>
+                    <p class="principle-desc">Motivation creates intent. Structure creates performance.</p>
+                </div>
+            </div>
+
+            <div class="principle-item r">
+                <div class="principle-num">02</div>
+                <div class="principle-body">
+                    <div class="principle-title">Control beats noise.</div>
+                    <p class="principle-desc">A business with clear operating law produces more than one with unlimited tools and no accountability.</p>
+                </div>
+            </div>
+
+            <div class="principle-item r">
+                <div class="principle-num">03</div>
+                <div class="principle-body">
+                    <div class="principle-title">Structure creates scale.</div>
+                    <p class="principle-desc">You cannot replicate chaos. You can only replicate what has been standardized.</p>
+                </div>
+            </div>
+
+            <div class="principle-item r">
+                <div class="principle-num">04</div>
+                <div class="principle-body">
+                    <div class="principle-title">The market trusts what performs consistently.</div>
+                    <p class="principle-desc">Not what performs occasionally. Reputation is the product of repeatable execution.</p>
+                </div>
+            </div>
+
+            <div class="principle-item r">
+                <div class="principle-num">05</div>
+                <div class="principle-body">
+                    <div class="principle-title">Better operations lead to stronger business value.</div>
+                    <p class="principle-desc">Operational discipline is not separate from capital strategy. It is the foundation of it.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4 — HOW ORDYX WORKS
+============================================================ -->
+<section id="approach" class="sec">
+    <div class="wrap">
+        <span class="tag approach-tag r">The Approach</span>
+        <h2 class="approach-h2 r d1">We do not deliver advice and disappear.</h2>
+
+        <div class="approach-paras">
+            <p class="r d2">ORDYX works inside the operating reality of a business — not from a distance, not through a slide deck delivered in a meeting.</p>
+            <p class="r d3">The diagnostic is real. The installation is embedded. The enforcement is active.</p>
+            <p class="r d4">We are not a consulting firm that produces recommendations. We are an operating partner that produces change — measurable, structured, and lasting.</p>
+            <p class="r">Work is conducted on-site, remotely, or in a hybrid model determined by what the engagement requires. Engagements are not open-ended. They have clear phases: diagnose, structure, enforce. Each phase has a defined output and a defined business effect.</p>
+        </div>
+
+        <div class="approach-phases">
+            <div class="approach-phase r d1">
+                <div class="phase-num">Phase 01</div>
+                <div class="phase-name">Diagnose</div>
+                <p class="phase-desc">A structured assessment of the business as it actually operates — not as it is described. The gaps, the breakdowns, the source of performance loss.</p>
+            </div>
+            <div class="approach-phase r d2">
+                <div class="phase-num">Phase 02</div>
+                <div class="phase-name">Structure</div>
+                <p class="phase-desc">Operating procedures, accountability frameworks, and performance standards installed at the level of daily execution — not theoretical models.</p>
+            </div>
+            <div class="approach-phase r d3">
+                <div class="phase-num">Phase 03</div>
+                <div class="phase-name">Enforce</div>
+                <p class="phase-desc">Active reinforcement of the new operating standard. Discipline held. Drift caught. The structure tested against real business conditions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5 — FRANKFURT
+============================================================ -->
+<section id="frankfurt" class="sec">
+    <div class="wrap">
+        <span class="tag frankfurt-tag r">Location</span>
+        <h2 class="frankfurt-h2 r d1">Frankfurt.</h2>
+
+        <div class="frankfurt-paras">
+            <p class="r d2">Frankfurt is not a background detail. It signals something — precision, European business seriousness, institutional discipline, and operational rigor.</p>
+            <p class="r d3">ORDYX is headquartered in Frankfurt because that environment reflects the standards the firm applies: controlled, high-performance, and built for serious business.</p>
+            <p class="r d4">Engagements are conducted across Europe and internationally for the right clients and the right operational challenges.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6 — WHY LIMITED
+============================================================ -->
+<section id="selectivity" class="sec">
+    <div class="wrap">
+        <span class="tag selectivity-tag r">Selectivity</span>
+        <h2 class="selectivity-h2 r d1">Installed work requires focus. Not every company qualifies.</h2>
+
+        <div class="selectivity-body">
+            <p class="r d2">ORDYX operates with a limited number of active engagements. This is not positioning. This is the operating reality of work that goes deep.</p>
+            <p class="r d3">When ORDYX is inside a business — diagnosing, installing, enforcing — it requires full attention to that business.</p>
+
+            <div class="selectivity-signals r d4">
+                <div class="selectivity-signal">— The owner is serious about structural change, not just interested in it.</div>
+                <div class="selectivity-signal">— The operational problem is real and has persisted beyond normal attempts to fix it.</div>
+                <div class="selectivity-signal">— The investment in discipline is understood as investment in business value.</div>
+                <div class="selectivity-signal">— The business is ready for accountability, not just conversation about it.</div>
+            </div>
+
+            <p class="selectivity-closing r">Businesses looking for a quick fix, a temporary project, or generic operational advice are not the right fit.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7 — CTA
+============================================================ -->
+<section id="cta-section" class="sec">
+    <div class="wrap">
+        <div class="cta-inner">
+            <h2 class="cta-h2 r">If what you have read here reflects how you think about your business —</h2>
+            <p class="cta-sub r d1">The next step is a direct conversation.</p>
+            <a href="/#contact" class="btn btn-g r d2">Apply for a Strategy Session</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+    <div class="wrap">
+        <div class="foot-top-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding:64px 0 48px;border-bottom:1px solid var(--border);">
+            <div>
+                <div class="foot-brand" style="margin-bottom:12px;">ORDYX GROUP</div>
+                <div class="foot-sub" style="margin-bottom:24px;">The Operating Law of Disciplined Execution</div>
+                <div style="font-size:0.7rem;color:var(--muted);">Frankfurt am Main — Global HQ</div>
+                <div class="foot-social" style="margin-top:24px;">
+                    <a href="https://www.linkedin.com/company/ordyx-group/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/ordyxgroup/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61586259838602" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--bone);margin-bottom:20px;">Practice Areas</div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                    <li><a href="/#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Hospitality</a></li>
+                    <li><a href="/#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Healthcare</a></li>
+                    <li><a href="/#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Professional Services</a></li>
+                    <li><a href="/#practice-areas" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Technology</a></li>
+                    <li><a href="/#practice-areas" style="font-size:0.72rem;color:var(--muted);opacity:0.4;">Logistics (2028)</a></li>
+                </ul>
+            </div>
+            <div>
+                <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--bone);margin-bottom:20px;">Company</div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                    <li><a href="/about.html" style="font-size:0.72rem;color:var(--gold);">About</a></li>
+                    <li><a href="/problems.html" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Problems</a></li>
+                    <li><a href="/solutions.html" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Solutions</a></li>
+                    <li><a href="/#contact" style="font-size:0.72rem;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='#F2F2EE'" onmouseout="this.style.color=''">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--bone);margin-bottom:20px;">Contact</div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                    <li style="font-size:0.72rem;color:var(--muted);">Frankfurt am Main</li>
+                    <li style="font-size:0.72rem;color:var(--muted);">Germany</li>
+                    <li style="margin-top:8px;"><a href="/#contact" style="font-size:0.72rem;color:var(--gold);">Apply for Access →</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="foot-bottom" style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;flex-wrap:wrap;gap:12px;">
+            <div class="foot-copy">© 2026 ORDYX Group. All rights reserved.</div>
+            <div style="display:flex;gap:20px;">
+                <a href="/privacy-policy.html" style="font-size:0.6rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">Privacy Policy</a>
+                <a href="/terms-of-service.html" style="font-size:0.6rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ============================================================
+     JS
+============================================================ -->
+<script>
+    /* Nav sticky */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('stuck', window.scrollY > 55), { passive: true });
+
+    /* Mobile nav */
+    const burger = document.getElementById('burger');
+    const mobNav = document.getElementById('mobNav');
+    burger.addEventListener('click', () => {
+        const open = mobNav.classList.toggle('open');
+        burger.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
+    function closeNav() {
+        mobNav.classList.remove('open');
+        burger.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    /* Scroll reveal */
+    const io = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+        { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+    );
+    document.querySelectorAll('.r').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
