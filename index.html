@@ -2034,9 +2034,10 @@
     <div class="portal-card">
         <div class="pc-heading">Welcome back.</div>
         <div class="pc-sub">ORDYX Group — Client Portal</div>
-        <input type="email" class="pc-field" placeholder="Email address" autocomplete="email">
-        <input type="password" class="pc-field" placeholder="Password" autocomplete="current-password">
-        <button class="pc-btn">Sign In</button>
+        <div id="pc-error" style="display:none;background:#1a0808;border:1px solid #5a1a1a;color:#e57373;padding:10px 14px;border-radius:4px;font-size:0.78rem;letter-spacing:0.03em;margin-bottom:4px;"></div>
+        <input type="email" id="pc-email" class="pc-field" placeholder="Email address" autocomplete="email">
+        <input type="password" id="pc-password" class="pc-field" placeholder="Password" autocomplete="current-password">
+        <button class="pc-btn" id="pc-submit" onclick="portalSignIn()">Sign In</button>
         <p class="pc-note">Access by invitation only.<br>No credentials? <a href="#contact" onclick="closePortal()">Request access.</a></p>
     </div>
 </div>
@@ -2395,6 +2396,12 @@
         if (e) e.preventDefault();
         portalOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+        // Clear any previous error
+        const err = document.getElementById('pc-error');
+        if (err) { err.style.display = 'none'; err.textContent = ''; }
+        // Reset button
+        const btn = document.getElementById('pc-submit');
+        if (btn) { btn.textContent = 'Sign In'; btn.disabled = false; }
     }
     function closePortal() {
         portalOverlay.classList.remove('open');
@@ -2406,6 +2413,68 @@
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closePortal();
     });
+    // Allow Enter key to submit
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && portalOverlay.classList.contains('open')) {
+            portalSignIn();
+        }
+    });
+
+    /* Supabase sign-in */
+    const SUPA_URL  = 'https://zdfkvkwkhertozntaoch.supabase.co';
+    const SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpkZmt2a3draGVydG96bnRhb2NoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MjA3ODIsImV4cCI6MjA5MDk5Njc4Mn0.Q0OWHF_LM1JknN-5yHj11cuq7X1cJn5m02RX0joZkrQ';
+    const PORTAL    = 'https://ordyx-portal.vercel.app';
+
+    async function portalSignIn() {
+        const email    = document.getElementById('pc-email').value.trim();
+        const password = document.getElementById('pc-password').value;
+        const errEl    = document.getElementById('pc-error');
+        const btn      = document.getElementById('pc-submit');
+
+        function showError(msg) {
+            errEl.textContent = msg;
+            errEl.style.display = 'block';
+            btn.textContent = 'Sign In';
+            btn.disabled = false;
+        }
+
+        if (!email || !password) { showError('Please enter your email and password.'); return; }
+
+        btn.textContent = 'Signing in…';
+        btn.disabled = true;
+        errEl.style.display = 'none';
+
+        try {
+            const res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPA_KEY,
+                    'Authorization': 'Bearer ' + SUPA_KEY
+                },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+
+            if (!res.ok || data.error) {
+                showError(data.error_description || data.msg || 'Invalid email or password.');
+                return;
+            }
+
+            // Redirect to portal confirm page with tokens in hash (not exposed to server logs)
+            const hash = [
+                'access_token='  + encodeURIComponent(data.access_token),
+                'refresh_token=' + encodeURIComponent(data.refresh_token),
+                'token_type=bearer',
+                'expires_in='    + (data.expires_in || 3600)
+            ].join('&');
+
+            window.location.href = PORTAL + '/auth/confirm#' + hash;
+
+        } catch (err) {
+            showError('Network error. Please try again.');
+        }
+    }
 </script>
 
 </body>
