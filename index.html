@@ -2469,7 +2469,9 @@
                 'expires_in='    + (data.expires_in || 3600)
             ].join('&');
 
-            window.location.href = PORTAL + '/auth/confirm#' + hash;
+            // /auth/session is a client-side page that reads the hash tokens
+            // and calls setSession() — server-side routes cannot read URL hash fragments.
+            window.location.href = PORTAL + '/auth/session#' + hash;
 
         } catch (err) {
             showError('Network error. Please try again.');
@@ -2477,5 +2479,65 @@
     }
 </script>
 
+  <script src="https://cdn.jotfor.ms/agent/embedjs/019cdf48a5327d70a5dcb0bc373cd8bb1c05/embed.js?isVoice=1"></script>
+  <script>
+    (function() {
+      function getBottomOffset() {
+        // On mobile, push higher to clear footer text; desktop needs less
+        return window.innerWidth < 768 ? 90 : 70;
+      }
+      function fixBot() {
+        var bottom = getBottomOffset() + 'px';
+        // Target the iframe JotForm creates for the embedded agent
+        var iframes = document.querySelectorAll(
+          'iframe[title="Embedded Agent"], iframe[title="agent"], iframe[src*="jotfor"]'
+        );
+        iframes.forEach(function(iframe) {
+          // Walk up to find the fixed-position ancestor and move it up
+          var el = iframe;
+          for (var i = 0; i < 8; i++) {
+            if (!el) break;
+            var cs = window.getComputedStyle(el);
+            if (cs.position === 'fixed') {
+              el.style.setProperty('bottom', bottom, 'important');
+              el.style.setProperty('max-height', 'calc(100vh - 120px)', 'important');
+              break;
+            }
+            var inlineStyle = el.getAttribute('style') || '';
+            if (inlineStyle.includes('fixed')) {
+              el.style.setProperty('bottom', bottom, 'important');
+              el.style.setProperty('max-height', 'calc(100vh - 120px)', 'important');
+              break;
+            }
+            el = el.parentElement;
+          }
+        });
+        // Also catch any fixed div/span at bottom-right that contains the avatar
+        document.querySelectorAll('div, span').forEach(function(el) {
+          var s = el.getAttribute('style') || '';
+          if (s.includes('fixed') && s.includes('right') && (s.includes('bottom: 2') || s.includes('bottom:2'))) {
+            el.style.setProperty('bottom', bottom, 'important');
+            el.style.setProperty('max-height', 'calc(100vh - 120px)', 'important');
+          }
+        });
+        // Ensure the open chat window doesn't overflow viewport on mobile
+        if (window.innerWidth < 768) {
+          document.querySelectorAll('iframe[title="Embedded Agent"]').forEach(function(iframe) {
+            iframe.style.setProperty('max-width', 'calc(100vw - 24px)', 'important');
+            iframe.style.setProperty('max-height', 'calc(100vh - 130px)', 'important');
+          });
+        }
+      }
+      // Run multiple times to catch async widget injection
+      [500, 1200, 2500, 4000].forEach(function(t) { setTimeout(fixBot, t); });
+      // Re-run on resize (handles orientation change on mobile)
+      window.addEventListener('resize', function() { setTimeout(fixBot, 100); });
+      // Watch for DOM changes
+      var obs = new MutationObserver(function() { setTimeout(fixBot, 100); });
+      document.addEventListener('DOMContentLoaded', function() {
+        obs.observe(document.body, { childList: true, subtree: true });
+      });
+    })();
+  </script>
 </body>
 </html>
