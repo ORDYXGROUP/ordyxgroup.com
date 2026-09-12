@@ -85,10 +85,13 @@ p{font-size:clamp(0.92rem,1.12vw,1.02rem);line-height:1.86;color:var(--muted);}
 header.top{position:relative;overflow:hidden;padding:200px 0 100px;min-height:92vh;display:flex;align-items:center;}
 .hero-photo{position:absolute;inset:0;z-index:0;background:#000 url('/images/frankfurt1.jpg') center 30%/cover no-repeat;}
 .hero-photo::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.50) 40%,rgba(0,0,0,0.88) 88%,#000 100%);}
+  background:linear-gradient(180deg,rgba(0,0,0,0.40) 0%,rgba(0,0,0,0.22) 38%,rgba(0,0,0,0.70) 84%,#000 100%);}
 header.top>.wrap{position:relative;z-index:1;}
-header.top h1{text-shadow:0 2px 34px rgba(0,0,0,0.55);}
-header.top .sub{color:rgba(242,242,238,0.96);}
+header.top h1{text-shadow:0 2px 8px rgba(0,0,0,0.9),0 2px 44px rgba(0,0,0,0.6);}
+header.top .kicker{text-shadow:0 1px 8px rgba(0,0,0,0.8);}
+header.top .sub{color:#fff;text-shadow:0 1px 12px rgba(0,0,0,0.85);}
+header.top .meta{color:rgba(242,242,238,0.94);text-shadow:0 1px 10px rgba(0,0,0,0.8);}
+header.top .meta-fact,header.top .meta-fact b{text-shadow:0 1px 10px rgba(0,0,0,0.8);}
 .kicker{margin-bottom:22px;}
 header h1{margin:0 0 22px;max-width:15ch;}
 .sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--muted);max-width:60ch;margin:0 0 26px;line-height:1.7;}
@@ -133,6 +136,17 @@ section.dim{padding:60px 0;border-top:1px solid var(--border);}
 .scale input{position:absolute;opacity:0;pointer-events:none;}
 .scale-caption{display:flex;justify-content:space-between;margin-top:9px;}
 .scale-caption span{font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--faint);}
+.item .note{font-size:0.8rem;color:var(--faint);margin:0 0 16px;line-height:1.55;}
+
+/* How to answer + scale legend */
+section.how{padding:52px 0 8px;}
+.how-title{font-size:0.66rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+section.how p{font-size:0.95rem;color:var(--dim);max-width:62ch;margin:0 0 24px;line-height:1.7;}
+.legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.legend div{border:1px solid var(--border);background:var(--field);padding:12px 6px;text-align:center;}
+.legend .n{font-size:1.05rem;font-weight:700;color:var(--gold);}
+.legend .l{font-size:0.58rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--dim);margin-top:5px;line-height:1.35;}
+@media(max-width:640px){.legend .l{font-size:0.5rem;}}
 
 /* ============================================================
    CONTACT
@@ -260,6 +274,19 @@ footer{border-top:1px solid var(--border);margin-top:40px;}
 
 <!-- ============================================================ FORM -->
 <form id="quiz-form" class="wrap">
+
+  <section class="how">
+    <div class="how-title">How to answer</div>
+    <p>Read each statement and rate how true it is for your business <em>today</em> — not how you would like it to be. Be honest with yourself; there are no right answers, and nothing here is scored as pass or fail. It takes most people about 7&ndash;10 minutes.</p>
+    <div class="legend" aria-hidden="true">
+      <div><div class="n">1</div><div class="l">Strongly disagree</div></div>
+      <div><div class="n">2</div><div class="l">Disagree</div></div>
+      <div><div class="n">3</div><div class="l">Neutral</div></div>
+      <div><div class="n">4</div><div class="l">Agree</div></div>
+      <div><div class="n">5</div><div class="l">Strongly agree</div></div>
+    </div>
+  </section>
+
   <div id="dims-container"></div>
 
   <section class="contact">
@@ -353,44 +380,64 @@ footer{border-top:1px solid var(--border);margin-top:40px;}
 // ---------------------------------------------------------------------
 const DIMENSIONS = [
   { key:"pv", num:"01", title:"Performance Visibility",
-    desc:"Can you see the results that matter early enough to act on them?",
+    desc:"Can you see the results that matter early enough to act on them — or do problems tend to surprise you?",
     items:[
-      "I can tell within a day, not a week, when a key result has moved outside its normal range.",
-      "The numbers I check are compared against a clear target, not just last month.",
-      "When a number looks wrong, I already know who is responsible for explaining why.",
-      "The information I get is actually used to trigger a decision — not just reviewed and filed."
+      { t:"I can tell within a day — not a week — when an important number has moved out of its normal range.",
+        note:"5 = I'd notice almost immediately   ·   1 = I usually find out long after the fact" },
+      { t:"The numbers I look at are measured against a clear target, not just against last month.",
+        note:"5 = every key number has a target   ·   1 = I mostly compare to the past" },
+      { t:"When something looks wrong, I already know who owes me the explanation.",
+        note:"5 = ownership is obvious   ·   1 = I have to go find out who's responsible" },
+      { t:"The information I get actually changes a decision — it isn't just reviewed and filed away.",
+        note:"5 = data drives what we do next   ·   1 = we look at it and move on" }
     ]},
   { key:"od", num:"02", title:"Owner Dependency",
-    desc:"What happens when you are not available?",
+    desc:"What actually happens when you step away? Be honest about your last real absence.",
     items:[
-      "Standards hold up on a day I am not physically present.",
-      "Employees go to their manager first, not to me, when something goes wrong.",
-      "I could take a real week off without my phone becoming a second job.",
-      "Decisions that should be a manager's are made by a manager, not escalated to me by habit."
+      { t:"Standards hold up on the days I am not physically present.",
+        note:"5 = nothing slips when I'm gone   ·   1 = things drift the moment I leave" },
+      { t:"When something goes wrong, people go to their manager first — not straight to me.",
+        note:"5 = rarely me   ·   1 = almost always me" },
+      { t:"I could take a full week off without my phone becoming a second job.",
+        note:"5 = I can truly disconnect   ·   1 = I'm always on call" },
+      { t:"Decisions that should be a manager's are made by a manager — not pushed up to me out of habit.",
+        note:"5 = they decide and own it   ·   1 = everything escalates to me" }
     ]},
   { key:"mo", num:"03", title:"Management Ownership",
-    desc:"Do your managers maintain the operation, or own a result?",
+    desc:"Do your managers simply maintain the operation, or do they truly own a result?",
     items:[
-      "Each of my managers has one or two measurable results they are personally accountable for.",
-      "My managers have enough authority to act on a problem without asking me first.",
-      "I evaluate my managers mainly on outcomes, not on how busy or available they seemed.",
-      "When something goes wrong, the first question is \"what will change,\" not \"whose fault is it.\""
+      { t:"Each of my managers owns one or two measurable results they are personally accountable for.",
+        note:"5 = clear, owned outcomes   ·   1 = they just run the day" },
+      { t:"My managers have enough authority to fix a problem without checking with me first.",
+        note:"5 = real authority to act   ·   1 = they need my sign-off" },
+      { t:"I judge my managers on outcomes — not on how busy or available they seemed.",
+        note:"5 = I measure results   ·   1 = I reward effort and presence" },
+      { t:"When something breaks, our first question is “what will we change?” — not “whose fault is it?”",
+        note:"5 = we focus on the fix   ·   1 = we look for who to blame" }
     ]},
   { key:"ec", num:"04", title:"Execution Consistency",
-    desc:"Do your standards survive different shifts, employees and pressure?",
+    desc:"Do your standards survive different shifts, different people, and real pressure?",
     items:[
-      "A guest gets the same standard on a quiet Tuesday and a packed Saturday.",
-      "Quality does not depend on one or two exceptional people being on shift.",
-      "New employees reach full standard through a real process, not by watching and guessing.",
-      "Standards hold up under pressure, not just when things are calm."
+      { t:"A guest gets the same standard on a quiet Tuesday as on a packed Saturday.",
+        note:"5 = consistent either way   ·   1 = it really depends on the day" },
+      { t:"Our quality does not depend on one or two exceptional people being on shift.",
+        note:"5 = the system holds it up   ·   1 = it rests on a few individuals" },
+      { t:"New people reach full standard through a real process — not by watching and guessing.",
+        note:"5 = structured onboarding   ·   1 = sink or swim" },
+      { t:"Standards hold up under pressure, not only when things are calm.",
+        note:"5 = pressure-proof   ·   1 = they slip when it gets busy" }
     ]},
   { key:"ci", num:"05", title:"Connection From Information to Result",
-    desc:"Does the business complete the loop — from fact to a verified result?",
+    desc:"Does the business close the loop — from noticing a problem to a result that actually changed?",
     items:[
-      "When we discuss a problem, someone is clearly named as the owner of fixing it.",
-      "We usually go back and check whether last month's fix actually worked.",
-      "Recurring problems get a permanent change, not the same conversation every few weeks.",
-      "I could name the last decision we made that was actually verified against a real result."
+      { t:"When we discuss a problem, someone is clearly named as the owner of fixing it.",
+        note:"5 = always a named owner   ·   1 = it stays everyone's and no one's" },
+      { t:"We go back and check whether last month's fix actually worked.",
+        note:"5 = we verify   ·   1 = we assume and move on" },
+      { t:"Recurring problems get a permanent change — not the same conversation every few weeks.",
+        note:"5 = solved for good   ·   1 = the same issue keeps returning" },
+      { t:"I could name the last decision we made that was actually verified against a real result.",
+        note:"5 = yes, easily   ·   1 = not really" }
     ]}
 ];
 
@@ -408,10 +455,11 @@ function renderDimensions(){
         <h2 class="dim-title">${esc(dim.title)}</h2>
         <p class="dim-desc">${esc(dim.desc)}</p>
       </div>
-      ${dim.items.map((text,i)=>`
+      ${dim.items.map((item,i)=>`
         <div class="item" data-item="${dim.key}-${i}">
-          <p class="q">${esc(text)}</p>
-          <div class="scale" role="radiogroup" aria-label="${esc(text)}">
+          <p class="q">${esc(item.t)}</p>
+          ${item.note?`<p class="note">${esc(item.note)}</p>`:""}
+          <div class="scale" role="radiogroup" aria-label="${esc(item.t)}">
             ${SCALE.map(v=>`
               <label>
                 <input type="radio" name="${dim.key}-${i}" value="${v}" />

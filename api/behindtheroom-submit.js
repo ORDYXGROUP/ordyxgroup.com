@@ -117,12 +117,22 @@ async function sendResultEmail({ to, name, scores, strongest, weakest, recommend
   </td></tr>
 
   <!-- Closing -->
-  <tr><td style="border-top:1px solid #242424;padding-top:28px;padding-bottom:52px">
-    <p style="margin:0;font-size:13px;color:#888;line-height:1.8;font-style:italic">${EMAIL_CLOSING}</p>
+  <tr><td style="border-top:1px solid #242424;padding-top:28px;padding-bottom:20px">
+    <p style="margin:0;font-size:13px;color:#8f8f8f;line-height:1.8;font-style:italic">${EMAIL_CLOSING}</p>
   </td></tr>
 
-  <tr><td style="border-top:1px solid #1e1e1e;padding-top:28px">
-    <p style="margin:0;font-size:11px;color:#444;line-height:1.9">ORDYX GROUP &nbsp;·&nbsp; Frankfurt am Main &nbsp;·&nbsp; ordyxgroup.com</p>
+  <!-- ORDYX help / contact CTA -->
+  <tr><td style="padding:16px 0 6px">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#C9B037;text-transform:uppercase;margin-bottom:12px">If you'd like help</div>
+    <p style="margin:0 0 24px;font-size:15px;color:#c8c2b8;line-height:1.8">Your greatest exposure right now is <strong style="color:#f0ebe0">${TITLE[weakest]}</strong>, and the single step above is where the leverage is. If you would like support putting it into practice, <strong style="color:#f0ebe0">ORDYX is at your disposal</strong> — we work with hospitality owners and management teams to diagnose the wider system and support implementation across the business. Get in touch:</p>
+    <table cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#C9B037">
+      <a href="https://www.ordyxgroup.com/contact.html" style="display:inline-block;padding:15px 30px;color:#000;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none">Contact ORDYX &rarr;</a>
+    </td></tr></table>
+  </td></tr>
+
+  <tr><td style="border-top:1px solid #1e1e1e;padding-top:40px;padding-bottom:8px">
+    <p style="margin:0;font-size:11px;color:#555;line-height:1.9">ORDYX GROUP &nbsp;·&nbsp; Frankfurt am Main &nbsp;·&nbsp; <a href="https://www.ordyxgroup.com" style="color:#777;text-decoration:none">ordyxgroup.com</a></p>
+    <p style="margin:6px 0 0;font-size:10px;color:#3d3d3d;line-height:1.7">This is a diagnostic starting point, not a public rating or a judgment on the quality of your business.</p>
   </td></tr>
 
 </table>
