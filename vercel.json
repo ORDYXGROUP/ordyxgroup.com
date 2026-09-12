@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/behindtheroom", "destination": "/behindtheroom.html" }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
