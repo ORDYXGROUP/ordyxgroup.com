@@ -60,7 +60,10 @@ function validAnswers(answers) {
 }
 
 async function sendResultEmail({ to, name, scores, strongest, weakest, recommendation }) {
-  const from = process.env.FROM_EMAIL || 'ORDYX <hello@ordyxgroup.com>';
+  // Reuse the same sender/reply-to the site's contact form already uses, so
+  // this works with the existing (verified) Resend setup without new config.
+  const from = process.env.FROM_EMAIL || 'ORDYX GROUP <management@ordyxgroup.com>';
+  const replyTo = process.env.STEFAN_EMAIL || 'management@ordyxgroup.com';
   const firstName = (name || '').trim().split(/\s+/)[0] || 'there';
 
   const scoreRows = DIMENSIONS.map(d => `
@@ -147,7 +150,7 @@ async function sendResultEmail({ to, name, scores, strongest, weakest, recommend
       'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ from, to, subject: 'Your Hospitality Control Score', html }),
+    body: JSON.stringify({ from, to, subject: 'Your Hospitality Control Score', html, reply_to: replyTo }),
   });
   if (!r.ok) throw new Error(await r.text());
   return r.json();
