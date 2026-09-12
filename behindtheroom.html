@@ -82,12 +82,13 @@ p{font-size:clamp(0.92rem,1.12vw,1.02rem);line-height:1.86;color:var(--muted);}
 /* ============================================================
    HEADER
 ============================================================ */
-header.top{position:relative;overflow:hidden;padding:150px 0 60px;}
-.skyline-bg{position:absolute;left:0;right:0;bottom:0;height:300px;pointer-events:none;z-index:0;
-  -webkit-mask-image:linear-gradient(to top,#000 15%,transparent 92%);
-  mask-image:linear-gradient(to top,#000 15%,transparent 92%);}
-.skyline-bg svg{width:100%;height:100%;display:block;}
+header.top{position:relative;overflow:hidden;padding:200px 0 100px;min-height:92vh;display:flex;align-items:center;}
+.hero-photo{position:absolute;inset:0;z-index:0;background:#000 url('/images/frankfurt1.jpg') center 30%/cover no-repeat;}
+.hero-photo::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.50) 40%,rgba(0,0,0,0.88) 88%,#000 100%);}
 header.top>.wrap{position:relative;z-index:1;}
+header.top h1{text-shadow:0 2px 34px rgba(0,0,0,0.55);}
+header.top .sub{color:rgba(242,242,238,0.96);}
 .kicker{margin-bottom:22px;}
 header h1{margin:0 0 22px;max-width:15ch;}
 .sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--muted);max-width:60ch;margin:0 0 26px;line-height:1.7;}
@@ -231,7 +232,7 @@ footer{border-top:1px solid var(--border);margin-top:40px;}
 
 <!-- ============================================================ HEADER -->
 <header class="top">
-  <div class="skyline-bg" id="skyline-bg" aria-hidden="true"></div>
+  <div class="hero-photo" aria-hidden="true"></div>
   <div class="wrap">
     <div class="kicker tag">The Hospitality Control Score</div>
     <h1>Where is control disappearing in your business?</h1>
@@ -445,43 +446,6 @@ function updateProgress(){
 
 renderDimensions();
 updateProgress();
-
-// ---------------------------------------------------------------------
-// Faded Frankfurt skyline watermark — the same silhouette treatment
-// (same building shapes: flat, pyramid, taper, spike, ring, lattice)
-// used on the book's own closing "Continue the Conversation" page, so
-// the printed book and this page match. Drawn in the ORDYX gold accent
-// at low opacity, low behind the header — a quiet brand echo, never a
-// dominant visual.
-// ---------------------------------------------------------------------
-const SKYLINE_COLOR="#C9B037";
-const BUILDINGS=[
-  [0.00,0.85,1.05,"flat"],[0.85,0.55,1.55,"flat"],
-  [1.40,0.75,2.05,"pyramid"],[2.15,0.50,1.25,"flat"],
-  [2.65,0.68,2.55,"lattice"],[3.33,0.48,1.55,"flat"],
-  [3.81,0.62,1.85,"ring"],[4.43,0.52,1.10,"flat"],
-  [4.95,0.78,2.15,"spike"],[5.73,0.55,1.35,"flat"],
-  [6.28,0.66,1.65,"flat"],[6.94,0.48,1.00,"flat"],
-  [7.42,0.80,1.95,"taper"],[8.22,0.56,1.20,"flat"],
-  [8.78,0.62,1.50,"flat"],[9.40,0.60,0.90,"flat"]
-];
-function renderSkyline(){
-  const S=100,BASE_Y=0.55*S,VB_H=360,baseline=VB_H-20;
-  let shapes="";
-  BUILDINGS.forEach(([x,w,h,roof])=>{
-    const X=x*S,W=w*S,H=h*S,top=baseline-BASE_Y-H;
-    shapes+=`<rect x="${X}" y="${top}" width="${W}" height="${H+BASE_Y}" fill="${SKYLINE_COLOR}"/>`;
-    if(roof==="pyramid") shapes+=`<polygon points="${X},${top} ${X+W/2},${top-32} ${X+W},${top}" fill="${SKYLINE_COLOR}"/>`;
-    else if(roof==="taper") shapes+=`<polygon points="${X+6},${top} ${X+W/2},${top-40} ${X+W-6},${top}" fill="${SKYLINE_COLOR}"/>`;
-    else if(roof==="spike") shapes+=`<line x1="${X+W/2}" y1="${top}" x2="${X+W/2}" y2="${top-55}" stroke="${SKYLINE_COLOR}" stroke-width="3.5" stroke-linecap="round"/>`;
-    else if(roof==="ring"){shapes+=`<circle cx="${X+W/2}" cy="${top-22}" r="17" fill="none" stroke="${SKYLINE_COLOR}" stroke-width="3.2"/>`;shapes+=`<line x1="${X+W/2}" y1="${top}" x2="${X+W/2}" y2="${top-42}" stroke="${SKYLINE_COLOR}" stroke-width="2.6"/>`;}
-    else if(roof==="lattice") shapes+=`<line x1="${X+5}" y1="${top}" x2="${X+W-5}" y2="${top-50}" stroke="${SKYLINE_COLOR}" stroke-width="2.6"/>`;
-  });
-  shapes+=`<line x1="0" y1="${baseline+2}" x2="1000" y2="${baseline+2}" stroke="${SKYLINE_COLOR}" stroke-width="1.6"/>`;
-  const el=document.getElementById("skyline-bg");
-  if(el) el.innerHTML=`<svg viewBox="0 0 1000 ${VB_H}" preserveAspectRatio="xMidYMax slice" style="opacity:0.14">${shapes}</svg>`;
-}
-renderSkyline();
 
 // ---------------------------------------------------------------------
 // Nav shadow on scroll
